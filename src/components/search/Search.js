@@ -1,12 +1,14 @@
 
-import { useState } from "react";
-import { mobiles } from "../../data/mobiles";
+import { useState, useEffect } from "react";
+// import { mobiles } from "../../data/mobiles";
 import { MobileList } from "../mobile/MobileList";
+import { getMobiles } from '../../services/getMobiles'
 
 
 export const Search = () => {
 
   const [ search, setSearch ] = useState('');
+  const [ mobiles, setMobiles ] = useState([])
 
   const searchMultiple = (data) => {
     return data.filter(
@@ -17,7 +19,9 @@ export const Search = () => {
   }
 
   // console.log(mobiles.filter(mobile => mobile.model.toLocaleLowerCase().includes("liq")));
-
+  useEffect(() => {  
+    getMobiles().then(mobile => setMobiles(mobile))
+    }, [])
 
   const handleSearch= (e) => {
     setSearch(e.target.value)
@@ -31,7 +35,7 @@ export const Search = () => {
           <hr/>
             <input
               type="text"
-              placeholder="Filter search"
+              placeholder="Filter search..."
               className="form-control mb-4"
               name="filterText"
               onChange={handleSearch}
