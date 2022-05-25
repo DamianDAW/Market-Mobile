@@ -1,14 +1,13 @@
 import { MobileCard } from "./MobileCard"
 
-export const MobileList = ({ data }) => {
+export const MobileList = ({ data: mobile }) => {
 
-  console.log(data);
 
   return (
     <div className="row">      
         {
           // Optional Chaining ?.
-           data?.map((mobile) => (
+           mobile?.map((mobile) => (
              <MobileCard 
                key={ mobile.id }
                id={ mobile.id }
