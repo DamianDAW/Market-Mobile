@@ -6,6 +6,7 @@ import { MobileByID } from '../select/MobileByID'
 
 export const MobileScreen = () => {
   const params = useParams()
+  console.log(params);
   // const navigate = useNavigate()
   // console.log(params.id);
   
