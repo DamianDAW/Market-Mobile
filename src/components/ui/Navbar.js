@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Navbar.css'
 
 export const Navbar = () => {
@@ -10,7 +10,23 @@ export const Navbar = () => {
         >
           Market Mobile
         </Link> 
+
+        <NavLink 
+            className='nav-item nav-link '
+            to="/"
+        >
+            Home
+        </NavLink>
+
+        <NavLink 
+            className='nav-item nav-link '
+            to="/list"
+        >
+           Fav List
+        </NavLink>         
+
     </nav>
+
   )
 }
 

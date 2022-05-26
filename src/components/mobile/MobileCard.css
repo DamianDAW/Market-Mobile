@@ -15,11 +15,11 @@
   padding: 1rem;
   border-radius: 0.5rem;
   box-sizing: border-box;
+  z-index: 0;
   /* transition: 0.3s background; */
 }
 
-.mobileCard:hover,
-.mobileCard:focus-within {
+.mobileCard:hover {
   transition: all 0.3s ease-out;
   cursor: pointer;
   box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);

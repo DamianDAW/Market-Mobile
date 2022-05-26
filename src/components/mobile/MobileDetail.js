@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { getMobiles } from '../../services/getMobiles'
 import Spinner from 'react-bootstrap/Spinner'
 import './MobileDetail.css'
+import { FavoriteMobile } from '../favorites/FavoriteMobile'
 
 export const MobileDetail = () => {
   const params = useParams()
@@ -41,11 +42,14 @@ export const MobileDetail = () => {
 
   } else {
       
-    return (   
+    return (     
+      <>
       <div className='infoRow'>
         <div className='col-left'>
-          <img src={imgUrl} alt={model} className='img-thumbnail' />
+          <img src={imgUrl} alt={model} className='img-thumbnail' />    
         </div>
+        <FavoriteMobile />
+
         <div className='col-right'>
           <section className="mobileInfo">
             <header className="mobileInfo-header">
@@ -68,6 +72,9 @@ export const MobileDetail = () => {
           </button>
         </div>      
       </div>    				
+      
+      </>
+      
     )
   } 
 

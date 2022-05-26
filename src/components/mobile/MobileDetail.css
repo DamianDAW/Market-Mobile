@@ -4,8 +4,8 @@
   flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
+  justify-content: center;
   margin-top: 3rem;
-  justify-items: center;
   width: 100%;
 }
 
@@ -28,6 +28,8 @@
 .col-right {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   max-width: 55%;
   flex: 0 0 40%;
   width: 100%;
@@ -93,8 +95,8 @@
   background-color: #17a2b8;
 }
 .button:active {
-  color: #bbbbbb;
-  border-color: #bbbbbb;
+  outline: none;
+  transform: scale(0.95);
 }
 
 /*MEDIA*/

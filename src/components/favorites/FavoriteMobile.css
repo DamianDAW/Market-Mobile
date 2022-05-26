@@ -1,0 +1,71 @@
+.favorite-icon {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.favorite-icon button {
+  position: absolute;
+  inset-block-end: 0.5rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.star {
+  position: relative;
+  font-size: 2rem;
+}
+
+.on {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: rgb(240, 217, 15);
+}
+
+.off {
+  color: #ccc;
+}
+
+.favorite-icon button:hover,
+.favorite-icon button:focus {
+  outline: none;
+}
+
+.favorite-icon-detail {
+  display: flex;
+  justify-content: center;
+}
+
+.favorite-icon-detail button {
+  background-color: transparent;
+  border: none;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: #17a2b8;
+  text-align: center;
+  vertical-align: middle;
+  outline: none;
+}
+.favorite-icon-detail button:hover,
+.favorite-icon button:focus {
+  outline: none;
+}
+
+.favorite-icon-detail button:active {
+  outline: none;
+  transform: scale(0.95);
+}
+
+.on-detail {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: rgb(240, 217, 15);
+}
+
+.off-detail {
+  color: #ccc;
+}
