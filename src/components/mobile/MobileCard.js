@@ -1,25 +1,26 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import './MobileCard.css'
 
 export const MobileCard = ({brand, model, price, img, id}) => {
+
+  const navigate = useNavigate()
+  const redirectClickOnCard = () => {
+    navigate(`/mobiles/${id}`)        
+  }
+
   return (
-    <div className="col mb-3">   
-      <div className="card h-100">
-        <div className="row no-gutters">
-          <div className="col-10">
-            <img src={img} className="card-img" alt ={model} />
-          </div>
-          <div className="col-12">
-            <div className="card-body">
-              <h5 className="card-title">{brand}</h5>
-              <p className="card-text">{model}</p>
-            
-              <Link to={`/mobiles/${id}`}>
-                More info...
-                </Link>
-            </div>
-          </div>
-        </div>
-      </div>    
+    <div className="mobileCard" onClick={redirectClickOnCard}>   
+      <div className="mobileCard-img">
+        <img src={img}  alt ={model} />
+      </div>
+      <h5 className='mobileCard-title'>{brand}</h5>
+      <div className='elipsis'>
+      <h4 className='mobileCard-model'>{model}</h4>        
+      </div>
+      <Link className='mobileCard-link' to={`/mobiles/${id}`}>
+        <span className='mobileCard-span'>More info...</span>
+      </Link>           
     </div> 
+   
   )
 }

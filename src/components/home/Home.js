@@ -1,22 +1,23 @@
 import { useState, useEffect } from "react";
 import { MobileList } from "../mobile/MobileList";
 import { getMobiles } from '../../services/getMobiles'
+import './Home.css'
 
-export const HomeScreen = () => { 
+export const Home = () => { 
    
     const [ filterSearch, setfilterSearch ] = useState('');
     const [ mobiles, setMobiles ] = useState([])
 
-    console.log(mobiles);
+    // console.log(mobiles);
   
     const getFilteredMobile = () => {
-      if(mobiles?.length > 0) {
+
         return mobiles.filter(
           mobile => 
             mobile.model.toLowerCase().includes(filterSearch.toLowerCase()) || 
             mobile.brand.toLowerCase().includes(filterSearch.toLowerCase()) 
         )
-      }
+      
     }
   
     useEffect(() => {  
@@ -29,8 +30,7 @@ export const HomeScreen = () => {
   
     return (
       <div>
-        <div className="row">
-          <div className="col-5 mt-3">
+          <div >
             <h4>Filter</h4>
             <hr/>
               <input
@@ -40,15 +40,14 @@ export const HomeScreen = () => {
                 name="filterText"
                 onChange={handleSearch}
               />
-          </div>
         </div>
   
-        <div className="row">     
-          <div className="col-12">
+        <div>     
+          <div>
           <h4>Results</h4>
             <hr/>
           </div> 
-          <MobileList data={getFilteredMobile()} />
+          <MobileList mobile={getFilteredMobile()} />
         </div>  
       </div>
     )

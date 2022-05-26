@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { HomeScreen } from "./components/home/HomeScreen";
-import { DetailMobile } from "./components/mobile/DetailMobile";
+import { Home } from "./components/home/Home";
+import { MobileDetail } from "./components/mobile/MobileDetail";
 import { Navbar } from "./components/ui/Navbar";
 
 export const App = () => {
@@ -10,9 +10,9 @@ export const App = () => {
       <Navbar />
       <div className="container">
         <Routes>
-          <Route path="/" element={<HomeScreen />} />
-          <Route path="/mobiles" element={<HomeScreen />} />
-          <Route path="/mobiles/:id" element={<DetailMobile />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/mobiles" element={<Home />} />
+          <Route path="/mobiles/:id" element={<MobileDetail />} />
         </Routes>
       </div>
     </BrowserRouter>
