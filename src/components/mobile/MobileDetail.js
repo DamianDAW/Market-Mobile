@@ -25,6 +25,10 @@ export const MobileDetail = () => {
         console.error(e)
       })      
   }, [])
+
+  if(!mobile) {
+    return  navigate('/')      
+  }
     
   // console.log(mobile);       
 
