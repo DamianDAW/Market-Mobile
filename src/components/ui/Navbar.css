@@ -1,14 +1,17 @@
-.navbar {
+
+a:hover{
+  text-decoration: none;
+  color: burlywood;
+}
+.nav-div {
   background-color: #393d3f;
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
   padding: 0.5rem 1rem;
+
 }
 
-.navbar-brand {
+.navbar-item {
   font-family: "Roboto", sans-serif;
   display: inline-block;
   padding-top: 0.3125rem;
@@ -17,9 +20,13 @@
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
-  color: white;
+  color: gray;
   text-decoration: none;
   background-color: transparent;
+}
+
+.navbar-active {
+color:white;
 }
 
 @media screen and (max-width: 425px) {

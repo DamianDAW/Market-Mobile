@@ -58,6 +58,15 @@
   overflow: hidden;
 }
 
+.favorite-icon {
+  width: 25px;
+  
+}
+
+.favorite-container__enabled{
+background-color: lightgoldenrodyellow;
+}
+
 /*PARA LOS TRES PUNTOS SUSPENSIVOS*/
 .elipsis > * {
   display: block;
