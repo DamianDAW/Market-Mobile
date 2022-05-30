@@ -1,27 +1,54 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import './FavoriteMobile.css'
 
-export const FavoriteMobile = () => {
-  const [ addFav, setAddFav ] = useState(0)
-  const [ hover, setHover ] = useState(0)
+
+export const FavoriteMobile = ({id, brand, model}) => {
+
+  const [ listFav, setListFav ] = useState([])
+  const [ addFav, setAddFav ] = useState(false)
+  const [ hover, setHover ] = useState(false)
 
   const params = useParams()
 
-  if(typeof params.id === 'undefined') 
+  useEffect(() => {
+    const data = window.localStorage.getItem('fav-mobile-list')
+    if(data) {
+      setListFav(JSON.parse(data))      
+    }
+  }, [])
+
+  useEffect(() => {
+    window.localStorage.setItem('fav-mobile-list', JSON.stringify(listFav))
+    console.log(listFav);
+  }, [listFav])
+
+
+if(typeof params.id === 'undefined') 
   return (
     <div className="favorite-icon">
       <button
         type="button"
         className={(addFav || hover) ? "on" : "off"}
-        onClick={()=> setAddFav(1)}  
+        onClick={()=> {
+          setListFav([ 
+            ...listFav,           
+            {
+              id, 
+              brand,
+              model
+            }                      
+          ])
+          
+          setAddFav(true)
+        }}  
         onDoubleClick={() => {
-          setAddFav(0)
+          setAddFav(false)
         }}
-        onMouseEnter={() => setHover(1)}
-        onMouseLeave={() => setHover(0)}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
       >
-        <i className="star">&#9733;</i>
+        <span aria-label="Fav Mobile" role='img' className="star">&#9733;</span>
       </button>
     </div>
   )
@@ -40,6 +67,8 @@ export const FavoriteMobile = () => {
       </div>
   )
 
-  
-
 }
+
+
+
+

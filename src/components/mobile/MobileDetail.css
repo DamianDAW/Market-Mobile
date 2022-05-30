@@ -107,7 +107,7 @@
 
   .infoRow {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
     margin-top: 3rem;
@@ -149,6 +149,7 @@
 
   .infoRow {
     padding-right: 15%;
+    flex-direction: row;
   }
 
   .mobileInfo {
