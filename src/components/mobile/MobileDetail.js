@@ -3,13 +3,29 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { getMobiles } from '../../services/getMobiles'
 import Spinner from 'react-bootstrap/Spinner'
 import './MobileDetail.css'
-import { FavoriteMobile } from '../favorites/FavoriteMobile'
 
 export const MobileDetail = () => {
   const params = useParams()
-  // console.log(params);
 
-  const [ mobile, setMobile ] = useState([])
+  const [ mobile, setMobile ] = useState([])  
+  const [ favorites, setFavorites ] = useState(() => 
+    {
+      const data = window.localStorage.getItem('fav-mobile-list')
+        if(data) {
+        return JSON.parse(data)   
+        } 
+        return[]          
+    }
+  )
+  const [isFaved, setIsFaved ] = useState(() => 
+    {
+      const isNewFaved = favorites.some(favorite => favorite.id === params.id)
+      if(isNewFaved) {
+        return true
+      }
+      return false    
+    }
+  )
 
   const navigate = useNavigate()   
   const handleReturn = () => {
@@ -30,6 +46,21 @@ export const MobileDetail = () => {
   if(!mobile) {
     return  navigate('/')      
   }
+
+
+  const toggle = () => {
+    let newFavorites
+    const isFavorite = (favorites.filter(favorite => favorite.id === id)).length > 0
+    if(isFavorite) {
+       newFavorites = favorites.filter(favorite => favorite.id !== id)
+    } else {
+       newFavorites = [...favorites, {id, brand, model, imgUrl}]
+    }
+    setFavorites(newFavorites)
+    window.localStorage.setItem('fav-mobile-list', JSON.stringify(newFavorites))   
+    const isNewFaved = newFavorites.some(favId => favId.id === id)
+    setIsFaved(isNewFaved)
+  }  
     
   // console.log(mobile);       
 
@@ -37,44 +68,51 @@ export const MobileDetail = () => {
 
   if(mobile.length === 0 ) {
     return (
-      <Spinner animation="grow" variant="dark" size="sm"/>
+      <>
+        <div className='center'>
+          <Spinner animation="grow" variant="dark" size="sm" />      
+        </div>
+      </>         
     ) 
 
-  } else {
-      
+  } else {      
     return (     
       <>
-      <div className='infoRow'>
-        <div className='col-left'>
-          <img src={imgUrl} alt={model} className='img-thumbnail' />    
-        </div>
-        <FavoriteMobile />
-
-        <div className='col-right'>
-          <section className="mobileInfo">
-            <header className="mobileInfo-header">
-              <h3>{model}</h3>
-            </header>
-            <ul className="mobileInfo-list">
-              <li>              
-                <b>Brand:</b> <span>{brand}</span>
-              </li>
-              <li>
-                <b>Id:</b> {id}
-              </li>
-              <li>
-                <b>Price:</b> {price}€
-              </li>           
-            </ul>
-          </section>
-          <button className='button' onClick={handleReturn}>
-            Return
-          </button>
-        </div>      
-      </div>    				
-      
-      </>
-      
+        <div className='infoRow'>
+          <div className='col-left'>
+            <img src={imgUrl} alt={model} className='img-thumbnail' />    
+          </div>
+          <div className="favorite-icon-detail">
+            <button 
+              // className={ addFav ? "on-detail" : "off-detail"}
+              onClick={toggle}  
+              >
+                {(isFaved) ? 'Remove from wishlist' : 'Add to wishlist'}
+            </button>       
+          </div>
+          <div className='col-right'>
+            <section className="mobileInfo">
+              <header className="mobileInfo-header">
+                <h3>{model}</h3>
+              </header>
+              <ul className="mobileInfo-list">
+                <li>              
+                  <b>Brand:</b> <span>{brand}</span>
+                </li>
+                <li>
+                  <b>Id:</b> {id}
+                </li>
+                <li>
+                  <b>Price:</b> {price}€
+                </li>           
+              </ul>
+            </section>
+            <button className='button' onClick={handleReturn}>
+              Return
+            </button>
+          </div>      
+        </div>       
+      </>      
     )
   } 
 

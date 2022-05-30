@@ -4,8 +4,19 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0.5rem 1rem;
+}
+
+.navbar-nav {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  gap: 1rem;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
 }
 
 .navbar-brand {
@@ -17,7 +28,7 @@
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
-  color: white;
+  color: rgb(238, 240, 164) !important;
   text-decoration: none;
   background-color: transparent;
 }

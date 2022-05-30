@@ -1,7 +1,7 @@
 import { MobileCard } from "./MobileCard"
 import "./MobileList.css"
 
-export const MobileList = ({ mobile }) => {
+export const MobileList = ({ mobile, favorites, onAddFavorites }) => {
 
 
   return (
@@ -18,6 +18,8 @@ export const MobileList = ({ mobile }) => {
               model={ mobile.model }
               price={ mobile.price }
               img={ mobile.imgUrl }
+              favorites={favorites}
+              onAddFavorites={onAddFavorites}
             />               
 
           </li>

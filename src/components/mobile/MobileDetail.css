@@ -38,6 +38,13 @@
   position: relative;
 }
 
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
 .mobileInfo {
   color: #497081;
   border-radius: 5px;

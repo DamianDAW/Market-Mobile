@@ -3,27 +3,30 @@ import './Navbar.css'
 
 export const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-sm navbar-dark bg-dark">        
+    <nav className="navbar navbar-expand-sm navbar-dark bg-dark"> 
+    
         <Link 
           className="navbar-brand" 
           to="/"
         >
           Market Mobile
         </Link> 
-
+      <div className="navbar-nav">
         <NavLink 
-            className='nav-item nav-link '
+            className={ ({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '') }
             to="/"
         >
             Home
         </NavLink>
 
         <NavLink 
-            className='nav-item nav-link '
+            className={ ({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '') }
             to="/list"
         >
-           Fav List
+           Favorites
         </NavLink>         
+      </div>       
+
 
     </nav>
 
