@@ -49,6 +49,9 @@ export const FavList = () => {
           <hr/>
         </div> 
         <MobileList mobile={favorites} favorites={favorites}  onAddFavorites={handleSetFavorites} />
+        <button className='button' onClick={handleReturn}>
+                Return
+        </button>
       </div>  
     )
 }
