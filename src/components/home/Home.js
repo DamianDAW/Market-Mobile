@@ -10,13 +10,11 @@ export const Home = () => {
 
   
   const getFilteredMobile = () => {
-
     return mobiles.filter(
       mobile => 
         mobile.model.toLowerCase().includes(filterSearch.toLowerCase()) || 
         mobile.brand.toLowerCase().includes(filterSearch.toLowerCase()) 
-    )
-    
+    )    
   }
 
   useEffect(() => {  
@@ -26,8 +24,6 @@ export const Home = () => {
   const handleSearch= (e) => {
     setfilterSearch(e.target.value)
   }
-
-
 
   return (
     <div>

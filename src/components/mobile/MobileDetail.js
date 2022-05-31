@@ -1,62 +1,55 @@
-import { useState, useEffect, useContext } from 'react'
+// import { useState, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import FavContext from '../../context/FavContext'
-import { getMobiles } from '../../services/getMobiles'
+// import FavContext from '../../context/FavContext'
+import { useSingleMobile } from '../../hooks/useSingleMobile'
+import { useToggle } from '../../hooks/useToggle'
 import { Spinner } from '../spinner/Spinner'
 import './MobileDetail.css'
 
 export const MobileDetail = () => {
+
   const params = useParams()
   const navigate = useNavigate()   
   const handleReturn = () => {
      navigate(-1)
   }
 
-  const [ mobile, setMobile ] = useState([])  
-  const {favorites, setFavorites} = useContext(FavContext)
-  const [isFaved, setIsFaved ] = useState(() => {
-    const isNewFaved = favorites.some(favorite => favorite.id === params.id)
-    if(isNewFaved) {
-      return true
-    }
-    return false    
-  }
-  ) 
+  const [mobile] = useSingleMobile(params.id) // Hook sustituye a getmobile con el useEffect
 
-  useEffect(() => {   
-    getMobiles()
-      .then(mobiles => {
-        const filteredMobileById = mobiles.find((item) => item.id === params.id)
-        setMobile(filteredMobileById)   
-      })  
-      .catch((e) => {
-        console.error(e)
-      })      
-  }, [])
+  // const { favorites, setFavorites } = useContext(FavContext)
+  // const [isFaved, setIsFaved ] = useState(() => {
+  //   const isNewFaved = favorites.some(favorite => favorite.id === params.id)
+  //   if(isNewFaved) {
+  //     return true
+  //   }
+  //   return false    
+  // }
+  // ) 
 
 
-
-  if(!mobile) {
-    return  navigate('/')      
-  }
-
-
-  const toggle = () => {
-    let newFavorites
-    const isFavorite = (favorites.filter(favorite => favorite.id === id)).length > 0
-    if(isFavorite) {
-       newFavorites = favorites.filter(favorite => favorite.id !== id)
-    } else {
-       newFavorites = [...favorites, {id, brand, model, imgUrl}]
-    }
-    setFavorites(newFavorites)
-    window.localStorage.setItem('fav-mobile-list', JSON.stringify(newFavorites))   
-    const isNewFaved = newFavorites.some(favId => favId.id === id)
-    setIsFaved(isNewFaved)
-  }  
+  // const toggle = () => {
+  //   let newFavorites
+  //   const isFavorite = (favorites.filter(favorite => favorite.id === params.id)).length > 0
+  
+  //   if(isFavorite) {
+  //      newFavorites = favorites.filter(favorite => favorite.id !== params.id)
+  //   } else {
+  //      newFavorites = [...favorites, {id, brand, model, imgUrl}]
+  //   }
+  //   setFavorites(newFavorites)
+  //   window.localStorage.setItem('fav-mobile-list', JSON.stringify(newFavorites))   
+  //   const isNewFaved = newFavorites.some(favId => favId.id === params.id)
+  //   setIsFaved(isNewFaved)
+  // }  
     
+  
 
   const {id, brand, model, price, imgUrl} = mobile
+  const [isFaved, toggle] = useToggle(id, brand, model, price, imgUrl)
+
+  // if(typeof mobile.id === 'undefined') {
+  //   return  navigate('/')      
+  // }
 
   if(mobile.length === 0 ) {
     return (
