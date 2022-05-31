@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import FavContext from '../../context/FavContext'
 import { getMobiles } from '../../services/getMobiles'
-// import Spinner from 'react-bootstrap/Spinner'
 import { Spinner } from '../spinner/Spinner'
 import './MobileDetail.css'
 
@@ -15,22 +14,13 @@ export const MobileDetail = () => {
 
   const [ mobile, setMobile ] = useState([])  
   const {favorites, setFavorites} = useContext(FavContext)
-  // const [ favorites, setFavorites ] = useState(() => 
-  //   {
-  //     const data = window.localStorage.getItem('fav-mobile-list')
-  //       if(data) {
-  //       return JSON.parse(data)   
-  //       } 
-  //       return[]          
-  //   }
-  // )
   const [isFaved, setIsFaved ] = useState(() => {
-      const isNewFaved = favorites.some(favorite => favorite.id === params.id)
-      if(isNewFaved) {
-        return true
-      }
-      return false    
+    const isNewFaved = favorites.some(favorite => favorite.id === params.id)
+    if(isNewFaved) {
+      return true
     }
+    return false    
+  }
   ) 
 
   useEffect(() => {   

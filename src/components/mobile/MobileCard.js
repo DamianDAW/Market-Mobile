@@ -1,14 +1,10 @@
-import { useEffect, useState, useContext } from 'react'
-// import Spinner from 'react-bootstrap/esm/Spinner'
+import { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import FavContext from '../../context/FavContext'
-// import { getMobiles } from '../../services/getMobiles'
 import './MobileCard.css'
 
 export const MobileCard = ({brand, model, price, img: imgUrl, id}) => {
-
-  // const [mobiles, setMobiles ] = useState([])
-  // const [isFaved, setIsFaved ] = useState(false)
+  
   const {favorites, setFavorites} = useContext(FavContext)
   const [isFaved, setIsFaved ] = useState(() => {
       const isNewFaved = favorites.some(favorite => favorite.id === id)
@@ -24,15 +20,6 @@ export const MobileCard = ({brand, model, price, img: imgUrl, id}) => {
     navigate(`/mobiles/${id}`)        
   }
 
-
-  // useEffect(() => {  
-  //   getMobiles()
-  //     .then(mobiles => setMobiles(mobiles))
-  //     .catch((e) => {
-  //       console.error(e)
-  //     })      
-  //   }, [])
-
   
    const toggle = (e) => {
      e.stopPropagation()
@@ -47,7 +34,6 @@ export const MobileCard = ({brand, model, price, img: imgUrl, id}) => {
      const isNewFaved = newFavorites.some(favId => favId.id === id)
      setIsFaved(isNewFaved)
    }  
-
 
 
     return (

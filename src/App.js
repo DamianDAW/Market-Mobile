@@ -7,12 +7,13 @@ import { Navbar } from "./components/ui/Navbar";
 import FavContext from './context/FavContext';
 
 export const App = () => {
+
   const [ favorites, setFavorites ] = useState(() => {
-      const data = window.localStorage.getItem('fav-mobile-list')
-        if(data) {
-        return JSON.parse(data)   
-        } 
-        return[]          
+    const data = window.localStorage.getItem('fav-mobile-list')
+      if(data) {
+      return JSON.parse(data)   
+      } 
+      return[]          
     }
   )
 

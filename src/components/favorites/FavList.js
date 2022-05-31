@@ -1,32 +1,17 @@
-import { useState } from "react"
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom";
+import FavContext from "../../context/FavContext";
 import { MobileList } from "../mobile/MobileList"
 import './FavList.css'
 
 export const FavList = () => {
 
-  const [ favorites, setFavorites ] = useState( () => {
-      const data = window.localStorage.getItem('fav-mobile-list')
-        if(data) {
-        return JSON.parse(data)   
-        } 
-        return[]          
-    }
-  )
-
-
+  const {favorites } = useContext(FavContext)
+ 
   const navigate = useNavigate()   
   const handleReturn = () => {
      navigate(-1)
-  }  
-   
-
-  const handleSetFavorites= (newFavorites) => {
-    setFavorites(newFavorites)
-    window.localStorage.setItem('fav-mobile-list', JSON.stringify(newFavorites))   
-  }
-
-  // console.log(favorites);
+  }     
 
 
   if(favorites.length === 0 ) {
@@ -45,7 +30,7 @@ export const FavList = () => {
         <h4>Favorites</h4>
           <hr/>
         </div> 
-        <MobileList mobile={favorites} favorites={favorites}  onAddFavorites={handleSetFavorites} />
+        <MobileList mobile={favorites} />
         <button className='button' onClick={handleReturn}>
                 Return
         </button>
