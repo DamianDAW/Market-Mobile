@@ -1,24 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { MobileList } from "../mobile/MobileList";
 import { getMobiles } from '../../services/getMobiles'
 import './Home.css'
+import FavContext from "../../context/FavContext";
 
 export const Home = () => { 
    
   const [ filterSearch, setfilterSearch ] = useState('');
   const [ mobiles, setMobiles ] = useState([])
-  const [ favorites, setFavorites ] = useState(() => 
-    {
-      const data = window.localStorage.getItem('fav-mobile-list')
-        if(data) {
-        return JSON.parse(data)   
-        } 
-        return[]          
-    }
-  )
-
-  // console.log(mobiles);
-
+  const {favorites, setFavorites} = useContext(FavContext)
+  // const [ favorites, setFavorites ] = useState(() => 
+  //   {
+  //     const data = window.localStorage.getItem('fav-mobile-list')
+  //       if(data) {
+  //       return JSON.parse(data)   
+  //       } 
+  //       return[]          
+  //   }
+  // )
+  
   const getFilteredMobile = () => {
 
     return mobiles.filter(
@@ -37,11 +37,11 @@ export const Home = () => {
     setfilterSearch(e.target.value)
   }
 
-  const handleSetFavorites= (newFavorites) => {
-    console.log(newFavorites);
-    setFavorites(newFavorites)
-    window.localStorage.setItem('fav-mobile-list', JSON.stringify(newFavorites))   
-  }
+  // const handleSetFavorites= (newFavorites) => {
+  //   console.log(newFavorites);
+  //   setFavorites(newFavorites)
+  //   window.localStorage.setItem('fav-mobile-list', JSON.stringify(newFavorites))   
+  // }
 
   return (
     <div>
@@ -62,7 +62,7 @@ export const Home = () => {
         <h4>Results</h4>
           <hr/>
         </div> 
-        <MobileList mobile={getFilteredMobile()} favorites={favorites} onAddFavorites={handleSetFavorites} />
+        <MobileList mobile={getFilteredMobile()} favorites={favorites} onAddFavorites={setFavorites} />
       </div>  
     </div>
   )

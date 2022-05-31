@@ -3,7 +3,6 @@ import "./MobileList.css"
 
 export const MobileList = ({ mobile, favorites, onAddFavorites }) => {
 
-
   return (
 
     <ul className="mobilesGrid">

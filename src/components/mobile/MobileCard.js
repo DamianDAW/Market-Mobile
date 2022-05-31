@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react'
-import Spinner from 'react-bootstrap/esm/Spinner'
+import { useEffect, useState, useContext } from 'react'
+// import Spinner from 'react-bootstrap/esm/Spinner'
 import { Link, useNavigate } from 'react-router-dom'
-import { getMobiles } from '../../services/getMobiles'
+import FavContext from '../../context/FavContext'
+// import { getMobiles } from '../../services/getMobiles'
 import './MobileCard.css'
 
-export const MobileCard = ({brand, model, price, img: imgUrl, id, favorites, onAddFavorites}) => {
+export const MobileCard = ({brand, model, price, img: imgUrl, id}) => {
 
-  const [mobiles, setMobiles ] = useState([])
+  // const [mobiles, setMobiles ] = useState([])
   // const [isFaved, setIsFaved ] = useState(false)
-  const [isFaved, setIsFaved ] = useState(() => 
-    {
+  const {favorites, setFavorites} = useContext(FavContext)
+  const [isFaved, setIsFaved ] = useState(() => {
       const isNewFaved = favorites.some(favorite => favorite.id === id)
       if(isNewFaved) {
         return true
@@ -24,16 +25,17 @@ export const MobileCard = ({brand, model, price, img: imgUrl, id, favorites, onA
   }
 
 
-  useEffect(() => {  
-    getMobiles()
-      .then(mobiles => setMobiles(mobiles))
-      .catch((e) => {
-        console.error(e)
-      })      
-    }, [])
+  // useEffect(() => {  
+  //   getMobiles()
+  //     .then(mobiles => setMobiles(mobiles))
+  //     .catch((e) => {
+  //       console.error(e)
+  //     })      
+  //   }, [])
 
   
-   const toggle = () => {
+   const toggle = (e) => {
+     e.stopPropagation()
      let newFavorites
      const isFavorite = (favorites.filter(favorite => favorite.id === id)).length > 0
      if(isFavorite) {
@@ -41,26 +43,20 @@ export const MobileCard = ({brand, model, price, img: imgUrl, id, favorites, onA
      } else {
         newFavorites = [...favorites, {id, brand, model, imgUrl}]
      }
-     onAddFavorites(newFavorites)
+     setFavorites(newFavorites)
      const isNewFaved = newFavorites.some(favId => favId.id === id)
      setIsFaved(isNewFaved)
    }  
 
 
-  // if(mobiles.length === 0 ) {
-  //   return (
-  //     <Spinner animation="grow" variant="dark" size="sm"/>
-  //   ) 
-
-  // } else {        
 
     return (
-      <div className="mobileCard">   
-        <div className="mobileCard-img"  onClick={redirectClickOnCard}>
+      <div className={(isFaved) ? 'mobileCard-active' : 'mobileCard'} onClick={redirectClickOnCard}>   
+        <div className="mobileCard-img"  >
           <img src={imgUrl}  alt ={model} />
         </div>
-        <h5 className='mobileCard-title'  onClick={redirectClickOnCard}>{brand}</h5>
-        <div className='elipsis'  onClick={redirectClickOnCard}>
+        <h5 className='mobileCard-title'  >{brand}</h5>
+        <div className='elipsis'  >
         <h4 className='mobileCard-model'>{model}</h4>        
         </div>
         <Link className='mobileCard-link' to={`/mobiles/${id}`}>
@@ -70,7 +66,9 @@ export const MobileCard = ({brand, model, price, img: imgUrl, id, favorites, onA
         <button
           type="button"
           className={(isFaved) ? 'on' : 'off'}
-          onClick={toggle}
+          onClick={(e) => {
+            toggle(e)
+          }}
         >
           <span aria-label="Fav Mobile" role='img' className="star">&#9733;</span>
        </button>

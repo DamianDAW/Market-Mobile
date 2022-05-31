@@ -5,8 +5,7 @@ import './FavList.css'
 
 export const FavList = () => {
 
-  const [ favorites, setFavorites ] = useState( () => 
-    {
+  const [ favorites, setFavorites ] = useState( () => {
       const data = window.localStorage.getItem('fav-mobile-list')
         if(data) {
         return JSON.parse(data)   
@@ -31,15 +30,13 @@ export const FavList = () => {
 
 
   if(favorites.length === 0 ) {
-    return (
-      <>
+    return (      
       <div className='center'>
         <h4>No items added to favorites</h4>
         <button className='button' onClick={handleReturn}>
                 Return
         </button>
-      </div>
-      </>         
+      </div>            
     ) 
   }
     return (

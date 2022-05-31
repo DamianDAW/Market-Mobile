@@ -1,36 +1,37 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import FavContext from '../../context/FavContext'
 import { getMobiles } from '../../services/getMobiles'
-import Spinner from 'react-bootstrap/Spinner'
+// import Spinner from 'react-bootstrap/Spinner'
+import { Spinner } from '../spinner/Spinner'
 import './MobileDetail.css'
 
 export const MobileDetail = () => {
   const params = useParams()
+  const navigate = useNavigate()   
+  const handleReturn = () => {
+     navigate(-1)
+  }
 
   const [ mobile, setMobile ] = useState([])  
-  const [ favorites, setFavorites ] = useState(() => 
-    {
-      const data = window.localStorage.getItem('fav-mobile-list')
-        if(data) {
-        return JSON.parse(data)   
-        } 
-        return[]          
-    }
-  )
-  const [isFaved, setIsFaved ] = useState(() => 
-    {
+  const {favorites, setFavorites} = useContext(FavContext)
+  // const [ favorites, setFavorites ] = useState(() => 
+  //   {
+  //     const data = window.localStorage.getItem('fav-mobile-list')
+  //       if(data) {
+  //       return JSON.parse(data)   
+  //       } 
+  //       return[]          
+  //   }
+  // )
+  const [isFaved, setIsFaved ] = useState(() => {
       const isNewFaved = favorites.some(favorite => favorite.id === params.id)
       if(isNewFaved) {
         return true
       }
       return false    
     }
-  )
-
-  const navigate = useNavigate()   
-  const handleReturn = () => {
-     navigate(-1)
-  }
+  ) 
 
   useEffect(() => {   
     getMobiles()
@@ -42,6 +43,8 @@ export const MobileDetail = () => {
         console.error(e)
       })      
   }, [])
+
+
 
   if(!mobile) {
     return  navigate('/')      
@@ -62,57 +65,51 @@ export const MobileDetail = () => {
     setIsFaved(isNewFaved)
   }  
     
-  // console.log(mobile);       
 
   const {id, brand, model, price, imgUrl} = mobile
 
   if(mobile.length === 0 ) {
     return (
-      <>
-        <div className='center'>
-          <Spinner animation="grow" variant="dark" size="sm" />      
-        </div>
-      </>         
+      <div className='center'>
+          <Spinner />
+      </div>          
     ) 
-
   } else {      
     return (     
-      <>
-        <div className='infoRow'>
-          <div className='col-left'>
-            <img src={imgUrl} alt={model} className='img-thumbnail' />    
-          </div>
-          <div className="favorite-icon-detail">
-            <button 
-              // className={ addFav ? "on-detail" : "off-detail"}
-              onClick={toggle}  
-              >
-                {(isFaved) ? 'Remove from wishlist' : 'Add to wishlist'}
-            </button>       
-          </div>
-          <div className='col-right'>
-            <section className="mobileInfo">
-              <header className="mobileInfo-header">
-                <h3>{model}</h3>
-              </header>
-              <ul className="mobileInfo-list">
-                <li>              
-                  <b>Brand:</b> <span>{brand}</span>
-                </li>
-                <li>
-                  <b>Id:</b> {id}
-                </li>
-                <li>
-                  <b>Price:</b> {price}€
-                </li>           
-              </ul>
-            </section>
-            <button className='button' onClick={handleReturn}>
-              Return
-            </button>
-          </div>      
-        </div>       
-      </>      
+      <div className='infoRow'>
+        <div className='col-left'>
+          <img src={imgUrl} alt={model} className='img-thumbnail' />    
+        </div>
+        <div className="favorite-icon-detail">
+          <button 
+            onClick={toggle}  
+            >
+              {(isFaved) ? 'Remove from wishlist' : 'Add to wishlist'}
+          </button>       
+        </div>
+        <div className='col-right'>
+          <section className="mobileInfo">
+            <header className="mobileInfo-header">
+              <h3>{model}</h3>
+            </header>
+            <ul className="mobileInfo-list">
+              <li>              
+                <b>Brand:</b> <span>{brand}</span>
+              </li>
+              <li>
+                <b>Id:</b> {id}
+              </li>
+              <li>
+                <b>Price:</b> {price}€
+              </li>           
+            </ul>
+          </section>
+          <button className='button' onClick={handleReturn}>
+            Return
+          </button>
+        </div>      
+      </div>       
+            
     )
   } 
 
