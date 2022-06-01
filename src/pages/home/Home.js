@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MobileList } from "../mobile/MobileList";
+import { MobileList } from "../detail/MobileList";
 import { getMobiles } from '../../services/getMobiles'
 import './Home.css'
 

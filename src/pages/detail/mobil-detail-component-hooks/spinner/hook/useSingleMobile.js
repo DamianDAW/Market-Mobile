@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import { getMobiles } from '../services/getMobiles'
+import { getMobiles } from '../../../../../services/getMobiles'
 
 export const  useSingleMobile = (id) => {
     

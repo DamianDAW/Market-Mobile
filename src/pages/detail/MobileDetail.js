@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { useSingleMobile } from '../../hooks/useSingleMobile'
+import { useSingleMobile } from './mobil-detail-component-hooks/spinner/hook/useSingleMobile'
 import { useFavoriteMobile } from '../../hooks/useFavoriteMobile'
-import { Spinner } from '../spinner/Spinner'
+import { Spinner } from './mobil-detail-component-hooks/spinner/Spinner'
 import './MobileDetail.css'
 
 export const MobileDetail = () => {

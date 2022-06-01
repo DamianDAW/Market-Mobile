@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { useNavigate } from "react-router-dom";
 import FavContext from "../../context/FavContext";
-import { MobileList } from "../mobile/MobileList"
+import { MobileList } from "../detail/MobileList"
 import './FavList.css'
 
 export const FavList = () => {

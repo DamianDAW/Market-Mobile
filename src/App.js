@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { Home } from "./components/home/Home";
-import { MobileDetail } from "./components/mobile/MobileDetail";
-import { FavList } from "./components/favorites/FavList"
-import { Navbar } from "./components/ui/Navbar";
+import { Home } from "./pages/home/Home";
+import { MobileDetail } from "./pages/detail/MobileDetail";
+import { FavList } from "./pages/favorites/FavList"
+import { Navbar } from "./components/global/Navbar";
 import FavContext from './context/FavContext';
 
 export const App = () => {
