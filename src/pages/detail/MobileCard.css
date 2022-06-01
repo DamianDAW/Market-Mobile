@@ -200,9 +200,16 @@
   }
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1200px) {
   .favorite-icon-detail {
-    margin-top: 23rem;
-    margin-right: 24.5rem;
+    margin-top: 26rem;
+    margin-right: 27rem;
+  }
+
+  @media screen and (min-width: 1440px) {
+    .favorite-icon-detail {
+      margin-top: 25rem;
+      margin-right: 24rem;
+    }
   }
 }

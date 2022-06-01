@@ -30,7 +30,7 @@ export const MobileDetail = () => {
     return (     
       <div className='infoRow'>
         <div className='col-left'>
-          <img src={imgUrl} alt={model} className='img-thumbnail' />    
+          <img src={imgUrl} alt={model} className='img-thumbnail animate__animated animate__fadeInLeft' />    
         </div>
         <div className="favorite-icon-detail">
           <button 
