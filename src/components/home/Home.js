@@ -21,8 +21,8 @@ export const Home = () => {
     getMobiles().then(mobiles => setMobiles(mobiles))
     }, [])
 
-  const handleSearch= (e) => {
-    setfilterSearch(e.target.value)
+  const handleSearch= (event) => {
+    setfilterSearch(event.target.value)
   }
 
   return (
@@ -44,7 +44,7 @@ export const Home = () => {
         <h4>Results</h4>
           <hr/>
         </div> 
-        <MobileList mobile={getFilteredMobile()}  />
+        <MobileList mobiles={getFilteredMobile()}  />
       </div>  
     </div>
   )

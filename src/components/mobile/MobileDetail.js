@@ -1,8 +1,6 @@
-// import { useState, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-// import FavContext from '../../context/FavContext'
 import { useSingleMobile } from '../../hooks/useSingleMobile'
-import { useToggle } from '../../hooks/useToggle'
+import { useFavoriteMobile } from '../../hooks/useFavoriteMobile'
 import { Spinner } from '../spinner/Spinner'
 import './MobileDetail.css'
 
@@ -14,42 +12,13 @@ export const MobileDetail = () => {
      navigate(-1)
   }
 
-  const [mobile] = useSingleMobile(params.id) // Hook sustituye a getmobile con el useEffect
-
-  // const { favorites, setFavorites } = useContext(FavContext)
-  // const [isFaved, setIsFaved ] = useState(() => {
-  //   const isNewFaved = favorites.some(favorite => favorite.id === params.id)
-  //   if(isNewFaved) {
-  //     return true
-  //   }
-  //   return false    
-  // }
-  // ) 
-
-
-  // const toggle = () => {
-  //   let newFavorites
-  //   const isFavorite = (favorites.filter(favorite => favorite.id === params.id)).length > 0
-  
-  //   if(isFavorite) {
-  //      newFavorites = favorites.filter(favorite => favorite.id !== params.id)
-  //   } else {
-  //      newFavorites = [...favorites, {id, brand, model, imgUrl}]
-  //   }
-  //   setFavorites(newFavorites)
-  //   window.localStorage.setItem('fav-mobile-list', JSON.stringify(newFavorites))   
-  //   const isNewFaved = newFavorites.some(favId => favId.id === params.id)
-  //   setIsFaved(isNewFaved)
-  // }  
-    
-  
-
+  const [mobile, notFoundMobile] = useSingleMobile(params.id) // Hook sustituye a getmobile con el useEffect
+  const [isFavorite, changeFav] = useFavoriteMobile(mobile)
   const {id, brand, model, price, imgUrl} = mobile
-  const [isFaved, toggle] = useToggle(id, brand, model, price, imgUrl)
 
-  // if(typeof mobile.id === 'undefined') {
-  //   return  navigate('/')      
-  // }
+  if(notFoundMobile) {
+    return navigate("/")
+  }  
 
   if(mobile.length === 0 ) {
     return (
@@ -65,9 +34,9 @@ export const MobileDetail = () => {
         </div>
         <div className="favorite-icon-detail">
           <button 
-            onClick={toggle}  
+            onClick={changeFav}  
             >
-              {(isFaved) ? 'Remove from wishlist' : 'Add to wishlist'}
+              {(isFavorite) ? 'Remove from wishlist' : 'Add to wishlist'}
           </button>       
         </div>
         <div className='col-right'>

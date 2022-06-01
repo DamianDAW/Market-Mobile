@@ -1,28 +1,18 @@
 import { MobileCard } from "./MobileCard"
 import "./MobileList.css"
 
-export const MobileList = ({ mobile }) => {
+export const MobileList = ({ mobiles }) => {
 
   return (
-
     <ul className="mobilesGrid">
       {
         // Optional Chaining ?.
-        mobile?.map((mobile) => (
+        mobiles?.map((mobile) => (
           <li key={ mobile.id }>
-            <MobileCard 
-              key={ mobile.id }
-              id={ mobile.id }
-              brand={ mobile.brand}
-              model={ mobile.model }
-              price={ mobile.price }
-              img={ mobile.imgUrl }             
-            />               
-
+            <MobileCard mobile={mobile} />
           </li>
         ))           
       }       
-    </ul>
-    
+    </ul>    
   )
 }

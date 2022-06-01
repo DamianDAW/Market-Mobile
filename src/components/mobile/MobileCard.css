@@ -174,21 +174,35 @@
   .favorite-icon-detail {
     position: absolute;
     justify-content: flex-start;
-    margin-top: 18rem;
+    margin-top: 20rem;
     margin-right: 21rem;
+  }
+
+  .mobileCard-span {
+    font-size: 1.2rem !important;
+  }
+  .star {
+    width: 14px;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .favorite-icon-detail {
+    margin-top: 24rem;
+    margin-right: 23rem;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .favorite-icon-detail {
-    margin-top: 20rem;
+    margin-top: 21rem;
     margin-right: 23rem;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .favorite-icon-detail {
-    margin-top: 22rem;
-    margin-right: 25rem;
+    margin-top: 23rem;
+    margin-right: 24.5rem;
   }
 }

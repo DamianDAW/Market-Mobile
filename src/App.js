@@ -18,7 +18,6 @@ export const App = () => {
   )
 
   const handleSetFavorites= (newFavorites) => {
-    console.log(newFavorites);
     setFavorites(newFavorites)
     window.localStorage.setItem('fav-mobile-list', JSON.stringify(newFavorites))   
   }

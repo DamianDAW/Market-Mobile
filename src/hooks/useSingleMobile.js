@@ -1,30 +1,25 @@
 import {useState, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
 import { getMobiles } from '../services/getMobiles'
 
 export const  useSingleMobile = (id) => {
-
-  const navigate = useNavigate()   
-  
+    
   const [mobile, setMobile]= useState([])
- console.log(mobile);
+  const [ notFoundMobile, setNotFoundMobile ] = useState(false)
 
   useEffect(() => {   
     getMobiles()
       .then(mobiles => {
-        const filteredMobileById = mobiles.find((item) => item.id === id)
-        setMobile(filteredMobileById)   
+        const filteredMobileById = mobiles.find((item) => item.id === id)   
+        if(typeof filteredMobileById !== 'undefined') {
+          setMobile(filteredMobileById)             
+        } else {
+          setNotFoundMobile(true)
+        }
       })  
-      .catch((e) => {
-        console.error(e)
-        console.log(e.error.code);
+      .catch((error) => {
+        console.error(error)
       })      
   }, [])
 
-  if(!mobile) {
-     return navigate('/')      
-  }
-
-
-  return [mobile]
+  return [mobile, notFoundMobile]
 }
