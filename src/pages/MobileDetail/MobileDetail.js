@@ -3,6 +3,8 @@ import { useSingleMobile } from './hooks/useSingleMobile'
 import { useFavoriteMobile } from '../../hooks/useFavoriteMobile'
 import { Spinner } from './components/Spinner/Spinner'
 import './MobileDetail.css'
+import { useContext } from 'react'
+import AuthContext from '../../context/AuthContext'
 
 export const MobileDetail = () => {
 
@@ -14,6 +16,7 @@ export const MobileDetail = () => {
 
   const [mobile, notFoundMobile] = useSingleMobile(params.id) // Hook sustituye a getmobile con el useEffect
   const [isFavorite, changeFav] = useFavoriteMobile(mobile)
+  const{username} = useContext(AuthContext)
   const {id, brand, model, price, imgUrl} = mobile
 
   if(notFoundMobile) {
@@ -32,13 +35,19 @@ export const MobileDetail = () => {
         <div className='col-left'>
           <img src={imgUrl} alt={model} className='img-thumbnail animate__animated animate__fadeInLeft' />    
         </div>
-        <div className="favorite-icon-detail">
-          <button 
-            onClick={changeFav}  
-            >
-              {(isFavorite) ? 'Remove from wishlist' : 'Add to wishlist'}
-          </button>       
-        </div>
+        {
+          (username)
+          ?
+            <div className="favorite-icon-detail">
+              <button 
+                onClick={changeFav}  
+                >
+                  {(isFavorite) ? 'Remove from wishlist' : 'Add to wishlist'}
+              </button>       
+            </div>
+          :
+          <></>
+        }
         <div className='col-right'>
           <section className="mobileInfo">
             <header className="mobileInfo-header">

@@ -1,5 +1,7 @@
 
+import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import AuthContext from '../../../context/AuthContext'
 import { useFavoriteMobile } from '../../../hooks/useFavoriteMobile'
 import './MobileCard.css'
 
@@ -19,6 +21,8 @@ export const MobileCard = ({mobile}) => {
   }
    const [isFavorite, changeFav] = useFavoriteMobile(initialState)
 
+   const{username} = useContext(AuthContext)
+
     return (
       <div className={(isFavorite) ? 'mobileCard-active' : 'mobileCard'} onClick={redirectClickOnCard}>   
         <div className="mobileCard-img"  >
@@ -30,18 +34,24 @@ export const MobileCard = ({mobile}) => {
         </div>
         <Link className='mobileCard-link' to={`/mobiles/${id}`}>
           <span className='mobileCard-span'>More info...</span>
-        </Link>           
-        <div className="favorite-icon">
-        <button
-          type="button"
-          className={(isFavorite) ? 'on' : 'off'}
-          onClick={(event) => {
-            changeFav(event)
-          }}
-        >
-          <span aria-label="Fav Mobile" role='img' className="star">&#9733;</span>
-       </button>
-      </div>
+        </Link>
+        {
+          (username)
+          ?
+            <div className="favorite-icon">
+              <button
+                type="button"
+                className={(isFavorite) ? 'on' : 'off'}
+                onClick={(event) => {
+                  changeFav(event)
+                }}
+              >
+                <span aria-label="Fav Mobile" role='img' className="star">&#9733;</span>
+              </button>
+            </div>
+          :
+            <></>
+        }                   
       </div> 
     
     )

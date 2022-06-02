@@ -3,12 +3,14 @@ import { MobileList } from "../_components/MobileList/MobileList";
 import { getMobiles } from '../../services/getMobiles'
 import './Home.css'
 
+
 export const Home = () => { 
    
   const [ filterSearch, setfilterSearch ] = useState('');
   const [ mobiles, setMobiles ] = useState([])
 
-  
+
+
   const getFilteredMobile = () => {
     const filteredMobile = mobiles.filter(
       mobile => 

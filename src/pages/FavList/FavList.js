@@ -6,7 +6,7 @@ import './FavList.css'
 
 export const FavList = () => {
 
-  const {favorites } = useContext(FavContext)
+  const {favorites} = useContext(FavContext)
  
   const navigate = useNavigate()   
   const handleReturn = () => {
