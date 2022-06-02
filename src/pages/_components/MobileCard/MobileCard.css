@@ -1,0 +1,215 @@
+:root {
+  /* VARIABLES GLOBALES FUENTE */
+  font-size: 14px;
+  --baseFont: normal 0.875rem/1.375rem Arial;
+  --baseFontBold: bold 0.875rem/1.375rem Arial;
+}
+
+* {
+  transition: all 0.3s ease-out;
+}
+
+.mobileCard {
+  border: 1px solid #e9e9e9;
+  position: relative;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  z-index: 0;
+  /* transition: 0.3s background; */
+}
+
+.mobileCard-active {
+  border: 1px solid #e9e9e9;
+  position: relative;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  z-index: 0;
+  background-color: #fff9c4;
+}
+
+.mobileCard:hover,
+.mobileCard-active:hover {
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  top: -4px;
+}
+
+.mobileCard-img img {
+  vertical-align: middle;
+  /* Ajustamos la imagen para posibles resizes */
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.mobileCard-img {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin-block-end: 1rem;
+}
+
+.mobileCard-title {
+  font: var(--baseFontBold);
+  color: #282828;
+  margin: 0;
+}
+
+.mobileCard-description {
+  font: var(--baseFont);
+  margin: 0;
+}
+
+.mobileCard-link {
+  text-decoration: none !important;
+}
+.elipsis {
+  overflow: hidden;
+}
+
+/*PARA LOS TRES PUNTOS SUSPENSIVOS*/
+.elipsis > * {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*MEDIA*/
+@media screen and (min-width: 768px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  :root {
+    font-size: 18px;
+  }
+}
+
+/*BOTON FAVS*/
+.favorite-icon {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.favorite-icon button {
+  position: absolute;
+  inset-block-end: 0.5rem;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.star {
+  display: block;
+  width: 20px;
+  position: relative;
+  font-size: 2rem;
+}
+
+.on {
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  color: rgb(240, 217, 15);
+}
+
+.off {
+  color: #ccc;
+}
+
+.favorite-icon button:hover,
+.favorite-icon button:focus {
+  outline: none;
+}
+
+.favorite-icon-detail {
+  display: flex;
+  justify-content: center;
+}
+
+.favorite-icon-detail button {
+  background-color: transparent;
+  border: 0;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: #17a2b8;
+  text-align: center;
+  vertical-align: middle;
+  outline: none;
+}
+.favorite-icon-detail button:hover,
+.favorite-icon button:focus {
+  outline: none;
+}
+
+.favorite-icon-detail button:active {
+  outline: none;
+  transform: scale(0.95);
+}
+
+.on-detail {
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  color: rgb(240, 217, 15);
+}
+
+.off-detail {
+  color: #ccc;
+}
+
+/*MEDIA*/
+@media screen and (min-width: 500px) {
+}
+
+@media screen and (min-width: 768px) {
+  .favorite-icon-detail {
+    position: absolute;
+    justify-content: flex-start;
+    margin-top: 20rem;
+    margin-right: 21rem;
+  }
+
+  .mobileCard-span {
+    font-size: 1.2rem !important;
+  }
+  .star {
+    width: 14px;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .favorite-icon-detail {
+    margin-top: 24rem;
+    margin-right: 23rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .favorite-icon-detail {
+    margin-top: 21rem;
+    margin-right: 23rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .favorite-icon-detail {
+    margin-top: 26rem;
+    margin-right: 27rem;
+  }
+
+  @media screen and (min-width: 1440px) {
+    .favorite-icon-detail {
+      margin-top: 25rem;
+      margin-right: 24rem;
+    }
+  }
+}
