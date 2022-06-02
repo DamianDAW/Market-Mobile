@@ -1,7 +1,0 @@
-.mobilesGrid {
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(10rem, 100%), 1fr));
-  list-style: none;
-  padding: 0;
-}

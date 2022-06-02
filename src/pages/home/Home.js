@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MobileList } from "../detail/MobileList";
+import { MobileList } from "../_components/MobileList/MobileList";
 import { getMobiles } from '../../services/getMobiles'
 import './Home.css'
 
@@ -10,12 +10,16 @@ export const Home = () => {
 
   
   const getFilteredMobile = () => {
-    return mobiles.filter(
+    const filteredMobile = mobiles.filter(
       mobile => 
         mobile.model.toLowerCase().includes(filterSearch.toLowerCase()) || 
         mobile.brand.toLowerCase().includes(filterSearch.toLowerCase()) 
     )    
-  }
+    if(filteredMobile.length === 0) {
+      return false
+    }
+    return filteredMobile  
+    }
 
   useEffect(() => {  
     getMobiles().then(mobiles => setMobiles(mobiles))
@@ -35,18 +39,23 @@ export const Home = () => {
             placeholder="Filter search..."
             className="form-control mb-4"
             name="filterText"
+            autoComplete="off"
             onChange={handleSearch}
           />
       </div>
-
-      <div>     
-        <div>
+    
+      <div>
         <h4>Results</h4>
           <hr/>
-        </div> 
-        <MobileList mobiles={getFilteredMobile()}  />
+      </div>         
+        {
+         getFilteredMobile() 
+         ? <MobileList mobiles={getFilteredMobile()}  />
+         : (
+            <span>The item searched doesn't exists</span>                 
+          )    
+        }
       </div>  
-    </div>
   )
   
 }
