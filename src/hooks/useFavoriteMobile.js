@@ -15,7 +15,7 @@ export const useFavoriteMobile = ({id, brand, model, price, imgUrl}) => {
     if(isFavorite) {
        newFavorites = favorites.filter(favorite => favorite.id !== id)
     } else {
-       newFavorites = [...favorites, {id, brand, model, imgUrl}]
+       newFavorites = [...favorites, {id, brand, model, imgUrl, price}]
     }
     setFavorites(newFavorites)
     window.localStorage.setItem('fav-mobile-list', JSON.stringify(newFavorites))   

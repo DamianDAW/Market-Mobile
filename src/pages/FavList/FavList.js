@@ -10,7 +10,7 @@ export const FavList = () => {
  
   const navigate = useNavigate()   
   const handleReturn = () => {
-     navigate(-1)
+     navigate('/mobiles')
   }     
 
 

@@ -48,15 +48,31 @@
 
 @media screen and (max-width: 425px) {
   .navbar {
-    justify-content: center;
   }
 }
 
 @media (min-width: 576px) {
   .navbar-expand-sm {
-    -ms-flex-flow: row nowrap;
-    flex-flow: row nowrap;
-    -ms-flex-pack: start;
-    /* justify-content: flex-start; */
+    /* -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap; */
+    /* justify-content: flex-end; */
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    gap: 4.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar {
+    gap: 12rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .navbar {
+    gap: 20rem;
   }
 }

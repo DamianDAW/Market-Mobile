@@ -28,6 +28,66 @@ hr {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.search-div {
+  height: 4rem;
+  position: relative;
+}
+
+.search-box {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #2c3441;
+  height: 40px;
+  border-radius: 40px;
+  padding: 10px;
+}
+
+.search-box:hover > icon {
+  background: #536179;
+}
+
+.icon:hover {
+  transform: rotate(360deg) scale(0.8);
+}
+
+input {
+  width: 0;
+  border: none;
+  outline: none;
+  padding: 0;
+  background: none;
+  font-size: 1.1rem;
+  transition: 0.5s ease;
+  line-height: 20px;
+  color: #fff;
+}
+
+.icon {
+  color: #21dfcd;
+  justify-content: flex-end;
+  width: 40px;
+  font-size: 1.3rem;
+  height: 40px;
+  border-radius: 50%;
+  background: #2f3640;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.search-box:hover > input {
+  width: 200px;
+  padding: 0 10px;
+}
+
 @media screen and (max-width: 425px) {
   .navbar {
     justify-content: center;

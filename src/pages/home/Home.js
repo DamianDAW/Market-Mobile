@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { MobileList } from "../_components/MobileList/MobileList";
 import { getMobiles } from '../../services/getMobiles'
+import { FiSearch } from 'react-icons/fi'
 import './Home.css'
 
 
@@ -33,20 +34,23 @@ export const Home = () => {
 
   return (
     <div>
-      <div >
-        <h4>Filter</h4>
-        <hr/>
+      <div className="search-div">
+        {/* <h4>Filter</h4>
+        <hr/> */}
+        <div className="search-box">
           <input
             type="text"
-            placeholder="Filter search..."
-            className="form-control mb-4"
-            name="filterText"
+            placeholder="Filter search..."  
             autoComplete="off"
             onChange={handleSearch}
           />
+          <a href='##' className="icon">
+            <i className=""><FiSearch style={{size: "1rem"}}/></i>
+          </a>
+        </div>
       </div>
     
-      <div>
+      <div className="result-div">
         <h4>Results</h4>
           <hr/>
       </div>         
@@ -61,3 +65,33 @@ export const Home = () => {
   )
   
 }
+
+
+// return (
+//   <div>
+//     <div >
+//       <h4>Filter</h4>
+//       <hr/>
+//         <input
+//           type="text"
+//           placeholder="Filter search..."
+//           className="form-control mb-4"
+//           name="filterText"
+//           autoComplete="off"
+//           onChange={handleSearch}
+//         />
+//     </div>
+  
+//     <div>
+//       <h4>Results</h4>
+//         <hr/>
+//     </div>         
+//       {
+//        getFilteredMobile() 
+//        ? <MobileList mobiles={getFilteredMobile()}  />
+//        : (
+//           <span>The item searched doesn't exists</span>                 
+//         )    
+//       }
+//     </div>  
+// )

@@ -6,6 +6,7 @@
 }
 
 * {
+  outline: none;
   transition: all 0.3s ease-out;
 }
 
@@ -45,7 +46,7 @@
 }
 
 .mobileCard-img {
-  position: relative;
+  /* position: relative; */
   border-radius: 0.75rem;
   overflow: hidden;
   margin-block-end: 1rem;
@@ -75,6 +76,24 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.mobileCard-img button {
+  position: absolute;
+  background: transparent;
+  border: none;
+  inset-inline-end: 1rem;
+  inset-block-end: 6.15rem;
+  /* opacity: 0; */
+  transform: translateY(0.5rem);
+  will-change: opacity, transform;
+  transition: 0.3s opacity, 0.3s transform;
+}
+
+.buttonIcon .icon-cart {
+  position: relative;
+  inset-inline-start: 1px;
+  inset-block-start: 1px;
 }
 
 /*MEDIA*/
@@ -124,8 +143,25 @@
   color: #ccc;
 }
 
+.buttonIcon {
+  border: 0;
+  transition: all 0.4s ease;
+}
+
+.buttonIcon:active {
+  outline: none;
+  border: 0;
+  transform: scale(0.95);
+}
+
+.icon-cart:hover {
+  color: blue;
+}
+
 .favorite-icon button:hover,
-.favorite-icon button:focus {
+.favorite-icon button:focus,
+.buttonIcon:hover,
+.buttonIcon:focus {
   outline: none;
 }
 
