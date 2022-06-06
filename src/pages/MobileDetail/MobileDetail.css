@@ -198,3 +198,26 @@
     font-size: 1.8rem;
   }
 }
+
+.volver{
+  margin-top: 10px;
+  background-color: rgb(166 161 192);
+  mask: url(../../img/arrow-left.svg) no-repeat center;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.redirect{
+  display: flex; 
+}
+.redirect:hover{
+  color: burlywood; 
+  cursor: pointer; 
+}
+.redirect:hover .volver{
+  background-color: burlywood;
+}
+.redirect-text{
+  margin-left: 5px;
+}

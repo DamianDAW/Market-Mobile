@@ -213,3 +213,18 @@
     }
   }
 }
+
+.userOptions-container{
+  margin-top:5px
+}
+
+
+.carrito:hover{
+  background-color: burlywood;
+}
+.carrito-disabled{
+  background-color: rgb(166 161 192);
+  mask: url(../../../img/shopping_disabled.svg) no-repeat center;
+  width: 25px;
+  height: 25px ;
+}
