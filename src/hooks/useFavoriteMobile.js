@@ -1,11 +1,11 @@
 
 import { useContext } from "react";
-import FavContext from "../context/FavContext";
+import AppContext from "../context/AppContext";
 
 
 export const useFavoriteMobile = ({id, brand, model, price, imgUrl}) => {
  
-  const { favorites, setFavorites } = useContext(FavContext)
+  const { favorites, setFavorites } = useContext(AppContext)
   const isFavorite = favorites.some((favID) => favID.id === id)
 
   const changeFav = (event) => {

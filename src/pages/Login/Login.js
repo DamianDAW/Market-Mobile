@@ -1,12 +1,14 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import AppContext from "../../context/AppContext"
+import { Spinner } from "../MobileDetail/components/Spinner/Spinner"
 
 
 export const Login = () => {
   
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [user, setUser] = useState()
+  const [ password, setPassword ] = useState("")
+  const { userData, setUserData } = useContext(AppContext)
+  const [ isLoading, setIsLoading ] = useState(false)
 
 
   const navigate = useNavigate()
@@ -14,64 +16,69 @@ export const Login = () => {
   
   const handleLogin= (event) => {
     event.preventDefault()
-    const user = {username, password}
-    setUser(user)
-    window.localStorage.setItem('user-data', JSON.stringify(user))   
-    navigate('/mobiles')
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false)
+      navigate("/mobiles")
+    }, 2000)
+    setUserData({ ...userData, isLogged: true })
   }
 
-  const handleLoginInvitate= () => {
-    navigate('/mobiles')
+  const handleOnChange = (event) => {
+    setUserData({ ...userData, email: event.target.value });
   }
- 
+
+  const handlePassword = (event) => {
+    setPassword(event.target.value);
+  }
+
+
+
   return (
-    <>
     <div className="container mt-5">
-      <h1>Login</h1>
-      <hr />
-      <form onSubmit={handleLogin}>
-        <div className="form-group">
-          <label htmlFor="nameInput">Email address</label>
-          <input 
-            required 
-            type="text" 
-            className="form-control" 
-            id="nameInput" 
-            placeholder="Enter username" 
-            name="uname" 
-            onChange={({target}) => setUsername(target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="passwordInput">Password</label>
-          <input 
-            required 
-            type="password" 
-            className="form-control" 
-            id="passwordInput" 
-            placeholder="Password" 
-            name="pass" 
-            onChange={({target}) => setPassword(target.value)}
-          />
-        </div>
-        <button 
-          className="btn btn-primary"
-          type="submit"
-          >
-            Login
-        </button>      
-      </form>
-
-      <h1 className="mt-5">Continue as invite</h1>
-      <hr />
-           <button 
-        className="btn btn-primary"
-        onClick={handleLoginInvitate}
-        >
-          Enter
-      </button>
+      {isLoading ? (
+        <div>Iniciando Sesion...</div>
+      ) : ( 
+        <>
+        <h1>Login</h1>
+        <hr />
+        <form onSubmit={handleLogin}>
+          <div className="form-group">
+            <label htmlFor="nameInput">Email address</label>
+            <input 
+              required 
+              type="text" 
+              className="form-control" 
+              id="nameInput" 
+              placeholder="Enter username" 
+              name="uname" 
+              value={userData.email}
+              onChange= {handleOnChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="passwordInput">Password</label>
+            <input 
+              required 
+              type="password" 
+              className="form-control" 
+              id="passwordInput" 
+              placeholder="Password" 
+              name="pass" 
+              value={password}
+              onChange={handlePassword}
+            />
+          </div>
+          <button 
+            className="btn btn-primary"
+            type="submit"
+            >
+              Login
+          </button>      
+        </form>       
+        </>    
+      )}
     </div>
-    </>
   )
 }
 

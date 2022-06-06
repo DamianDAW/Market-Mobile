@@ -1,104 +1,122 @@
-import { useContext} from "react";
-import { useNavigate } from "react-router-dom"
-import { NavLink } from 'react-router-dom';
-import AuthContext from "../../context/AuthContext";
+import { useState, useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import AppContext from "../../context/AppContext";
+import { Counter } from "../Counter/Counter";
+
 import './Navbar.css'
 
 export const Navbar = () => {
 
   const navigate = useNavigate()
+  const { pathname } = useLocation()
+
+  const { userData, setUserData, addedToCart } = useContext(AppContext)
+
+  // const [isCartEnabled, setIsCartEnabled] = useState(false)
+  const isActive = (url) => {
+    if (pathname === url) {
+      return true
+    }
+    return false
+  }
+
+  const changeCartView = () => {
+  navigate("/mobiles/cart")
+  }
+
+  const handleLogin = () => {
+    navigate("/mobiles/login");
+  }
 
   const handleLogout = () => {
-    localStorage.clear()
-    navigate('/login')
+    setUserData({ email: "", isLogged: false })
   }
-
-  const {username}= useContext(AuthContext)
-
-  
-//   if(window.innerWidth===425) {
-// return(
-
-//     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-   
-//    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-//     <span className="navbar-toggler-icon"></span>
-//   </button>
-//   <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-//     <div className="navbar-nav">
-//       <a className="nav-item nav-link active" href="##">Home <span class="sr-only">(current)</span></a>
-//       <a className="nav-item nav-link" href="##">Features</a>
-//       <a className="nav-item nav-link" href="##">Pricing</a>
-//       <a className="nav-item nav-link disabled" href="##" tabindex="-1" aria-disabled="true">Disabled</a>
-//     </div>
-//     </div>
-//   </nav>
-// )
-//   }   
-     
+ 
+ 
+  if (!userData.isLogged) {
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">     
-  
-        <div className='navbar-brand'>
-          <span>Market Mobile</span>
-        </div>
-  
-        <div className="navbar-nav">
-          <NavLink 
-              className={({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '') }
-              to="/mobiles"
+      <nav className="nav-div">
+        <div className="nav-div__left-side">
+          <Link
+            className={`navbar-item ${isActive("/mobiles") ? "active" : ""}`}
+            to="/mobiles"
           >
-              Home
-          </NavLink>
-  
-          <NavLink 
-              className={(!username)?'invisible' : ({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '')}             
-              to="/list"
+            Market Mobile
+          </Link>
+        </div>
+
+        <div className="nav-div__rigth-side">
+          <div
+            className={`navbar-item__rigth-side ${
+              isActive("/mobiles/login") ? "active" : "" }`}
+            onClick={handleLogin}
+          >
+            LogIn
+          </div>
+        </div>
+      </nav>
+    );
+  } else {
+    return (
+      <nav className="nav-div">
+        <div className="nav-div__left-side">
+          <Link
+            className={`navbar-item ${isActive("/mobiles") ? "active" : ""}`}
+            to="/mobiles"
+          >
+            Market Mobile
+          </Link>
+
+          <Link
+            className={`navbar-item ${
+              isActive("/mobiles/favorites") ? "active" : ""
+            }`}
+            to="/mobiles/favorites"
           >
             Favorites
-          </NavLink> 
-  
-          <NavLink 
-              className={(!username)?'invisible' : ({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '')}             
-              to="/cart"
+          </Link>
+       
+
+        {/* <Link
+            className={`navbar-item ${
+              isActive("/mobiles/cart") ? "active" : ""
+            }`}
+            to="/mobiles/cart"
           >
             Cart
-          </NavLink> 
-        </div>   
-  
-        <div className='nav log'>
-          {
-            (!username) 
-            ?
-            <>
-              <span className='nav-item nav-link text-info'>Invitate</span>
-              <button 
-                  className='btn btn-outline-primary'
-                  onClick={handleLogout}
-              >
-                Register
-              </button>     
-            
-            </>
-            : 
-            <>
-              <span className='nav-item nav-link text-info'>{username}</span>
-              <button 
-                  className='nav-item nav-link btn btn-outline-danger'
-                  onClick={handleLogout}
-              >
-                Logout
-              </button>              
-            </>
-          }
-        
-        </div>   
-  
+          </Link> */}
+
+        </div>
+
+        <div className="nav-div__rigth-side">
+          <div className="navbar-item__rigth-side">
+            <div className="relative">
+              <div
+                // className={`cart cart${
+                //   isCartEnabled ? "-nav-enabled" : "-nav-disabled"
+                // }`}
+                className="cart cart-nav-disabled"
+                onClick={changeCartView}
+              ></div>
+              <Counter num={addedToCart.items.length}></Counter>
+            </div>
+          </div>
+          <div
+            className={`navbar-item__rigth-side ${
+              isActive("/mobiles/login") ? "active" : ""
+            }`}
+            onClick={handleLogout}
+          >
+            LogOut
+          </div>
+        </div>
       </nav>
-  
-    )  
-  
+    );
   }
+
+
+}
+
 
 
 

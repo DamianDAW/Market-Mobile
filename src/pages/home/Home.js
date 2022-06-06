@@ -65,33 +65,3 @@ export const Home = () => {
   )
   
 }
-
-
-// return (
-//   <div>
-//     <div >
-//       <h4>Filter</h4>
-//       <hr/>
-//         <input
-//           type="text"
-//           placeholder="Filter search..."
-//           className="form-control mb-4"
-//           name="filterText"
-//           autoComplete="off"
-//           onChange={handleSearch}
-//         />
-//     </div>
-  
-//     <div>
-//       <h4>Results</h4>
-//         <hr/>
-//     </div>         
-//       {
-//        getFilteredMobile() 
-//        ? <MobileList mobiles={getFilteredMobile()}  />
-//        : (
-//           <span>The item searched doesn't exists</span>                 
-//         )    
-//       }
-//     </div>  
-// )

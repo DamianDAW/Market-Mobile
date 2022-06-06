@@ -4,7 +4,7 @@ import { useFavoriteMobile } from '../../hooks/useFavoriteMobile'
 import { Spinner } from './components/Spinner/Spinner'
 import './MobileDetail.css'
 import { useContext } from 'react'
-import AuthContext from '../../context/AuthContext'
+import AppContext from '../../context/AppContext'
 
 export const MobileDetail = () => {
 
@@ -16,7 +16,7 @@ export const MobileDetail = () => {
 
   const [mobile, notFoundMobile] = useSingleMobile(params.id) // Hook sustituye a getmobile con el useEffect
   const [isFavorite, changeFav] = useFavoriteMobile(mobile)
-  const{username} = useContext(AuthContext)
+  const{username} = useContext(AppContext)
   const {id, brand, model, price, imgUrl} = mobile
 
   if(notFoundMobile) {

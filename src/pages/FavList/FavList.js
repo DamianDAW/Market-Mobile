@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { useNavigate } from "react-router-dom";
-import FavContext from "../../context/FavContext";
+import FavContext from "../../context/AppContext";
 import { MobileList } from "../_components/MobileList/MobileList"
 import './FavList.css'
 
