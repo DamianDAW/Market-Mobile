@@ -76,16 +76,6 @@ export const Navbar = () => {
             Favorites
           </Link>
        
-
-        {/* <Link
-            className={`navbar-item ${
-              isActive("/mobiles/cart") ? "active" : ""
-            }`}
-            to="/mobiles/cart"
-          >
-            Cart
-          </Link> */}
-
         </div>
 
         <div className="nav-div__rigth-side">

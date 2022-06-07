@@ -8,16 +8,9 @@ export const Cart = () => {
 
   const {addedToCart} = useContext(AppContext)
 
-  const isRepeated = addedToCart.items.filter(mobile => mobile.amount > 1)
+  const output = Object.values(addedToCart.items.reduce((acc, item) => ({...acc, [item.id]: {...item}}), {}))
+  // consoleK.log(output);
 
-  console.log(addedToCart);
-  // let prices
-  // if(addedToCart.length > 0) {
-  //   prices = addedToCart.map(mobile => Number(mobile.price)).reduce((prevItem, currentVal) => prevItem + currentVal)
-  // } else {
-  //   prices = 0
-  // }
-  // console.log(prices);
  
   const navigate = useNavigate()   
   const handleClickReturn = () => {
@@ -56,16 +49,24 @@ export const Cart = () => {
       <div className="mt-5">
         <h4>Total Price</h4>
       </div> 
-      <ul className="list-group list-group-flush">       
-        <li 
-          key={isRepeated[0].id} 
+      <ul className="list-group list-group-flush">  
+
+        {    
+
+        output.map((item, index) =>   
+          <li 
+          key={index} 
           className="list-group-item d-flex justify-content-between align-items-center"
-        >
-          {isRepeated[0].amount} 
-        </li>    
-       
+          >
+            {item.amount} x {item.model}
+          <span className="badge badge-success badge-pill">{item.price * item.amount}€</span>
+          </li>
+          )
+
+        }     
+  
         <li  
-          key={addedToCart.items.id} 
+          key={addedToCart.items[0].total} 
           className="list-group-item d-flex justify-content-between align-items-center"
         >
           Total

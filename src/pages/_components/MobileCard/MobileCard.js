@@ -8,12 +8,18 @@ import './MobileCard.css'
 
 
 export const MobileCard = ({mobile}) => {
-  const { userData, setAddedToCart } = useContext(AppContext)
+  const { userData, setAddedToCart, addedToCart } = useContext(AppContext)
   const {id, brand, model, price, imgUrl} = mobile
   const navigate = useNavigate()
   const redirectClickOnCard = () => {
     navigate(`/mobiles/${id}`)        
   }
+
+
+
+  // const isAdded = addedToCart.items.map(item => item.id).filter(ite)
+  
+  // console.log(isAdded);
  
   
   const initialState = {

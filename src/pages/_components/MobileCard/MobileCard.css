@@ -218,9 +218,15 @@
   margin-top: 5px;
 }
 
+.cart:active {
+  transform: translateY(0.5rem);
+  transition: 0.3s opacity, 0.3s transform;
+}
+
 .cart:hover {
   background-color: burlywood;
 }
+
 .cart-disabled {
   background-color: rgb(166 161 192);
   mask: url(../../../img/cart-arrow-down-solid.svg) no-repeat center;

@@ -22,3 +22,7 @@
 .redirect-text {
   margin-left: 5px;
 }
+
+.redirect-text:active {
+  transform: translateY(0.5rem);
+}
