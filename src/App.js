@@ -23,8 +23,8 @@ export const App = () => {
     }
     return {};
   });
-  const [carrito, setCarrito] = useState(() => {
-    const data = window.localStorage.getItem("carrito");
+  const [shoppingCart, setShoppingCart] = useState(() => {
+    const data = window.localStorage.getItem("shoppingCart");
     if (data) {
       return JSON.parse(data);
     }
@@ -47,30 +47,30 @@ export const App = () => {
     );
   };
 
-  const handleSetCarrito = ({ id, model, price }) => {
-    const isProductRepeated = carrito.productos.find(
+  const handleSetShoppingCart = ({ id, model, price }) => {
+    const isProductRepeated = shoppingCart.productos.find(
       (producto) => producto.id === id
     );
-    let newCarrito;
+    let newShoppingCart;
     if (isProductRepeated) {
       isProductRepeated.amount++;
       isProductRepeated.total =
         isProductRepeated.total + isProductRepeated.price;
 
-      newCarrito = {
-        productos: [...carrito.productos, isProductRepeated],
-        total: carrito.total + price,
+      newShoppingCart = {
+        productos: [...shoppingCart.productos, isProductRepeated],
+        total: shoppingCart.total + price,
       };
     } else {
-      newCarrito = {
+      newShoppingCart = {
         productos: [
-          ...carrito.productos,
+          ...shoppingCart.productos,
           { id, model, price, amount: 1, total: price },
         ],
-        total: carrito.total + price,
+        total: shoppingCart.total + price,
       };
     }
-    setCarrito(newCarrito);
+    setShoppingCart(newShoppingCart);
   };
 
   return (
@@ -81,8 +81,8 @@ export const App = () => {
           setFavorites: handleSetFavorites,
           userInfo,
           setUserInfo: handleSetUserInfo,
-          carrito,
-          setCarrito: handleSetCarrito,
+          shoppingCart,
+          setShoppingCart: handleSetShoppingCart,
         }}
       >
         <Navbar />

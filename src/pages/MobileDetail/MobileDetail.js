@@ -1,4 +1,4 @@
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSingleMobile } from "./hooks/useSingleMobile";
 import { useFavoriteMobile } from "../../hooks/useFavoriteMobile";
 import { Spinner } from "./components/Spinner/Spinner";

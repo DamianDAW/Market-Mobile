@@ -5,7 +5,7 @@ import { useFavoriteMobile } from "../../../hooks/useFavoriteMobile";
 import "./MobileCard.css";
 
 export const MobileCard = ({ mobile }) => {
-  const { userInfo, setCarrito } = useContext(AppContext);
+  const { userInfo, setShoppingCart } = useContext(AppContext);
   const { id, brand, model, price, imgUrl } = mobile;
   const navigate = useNavigate();
   const redirectClickOnCard = () => {
@@ -55,7 +55,7 @@ export const MobileCard = ({ mobile }) => {
             className={`carrito carrito-disabled`}
             onClick={(event) => {
               event.stopPropagation();
-              setCarrito(event, { id, model, price });
+              setShoppingCart(event, { id, model, price });
             }}
           ></div>
         </div>

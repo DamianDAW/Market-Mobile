@@ -6,11 +6,11 @@ import { Counter } from "../Counter/Counter";
 import "./Navbar.css";
 
 export const Navbar = () => {
-  const { userInfo, setUserInfo, carrito } = useContext(AppContext);
+  const { userInfo, setUserInfo, shoppingCart } = useContext(AppContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const [isCarritoEnabled, setIsCarritoEnabled] = useState(false);
+  const [isShoppingCartEnabled, setIsShoppingCartEnabled] = useState(false);
   const isActive = (url) => {
     if (pathname === url) {
       return true;
@@ -19,10 +19,10 @@ export const Navbar = () => {
   };
 
   const changeEnabledState = () => {
-    if (isCarritoEnabled) {
-      setIsCarritoEnabled(false);
+    if (isShoppingCartEnabled) {
+      setIsShoppingCartEnabled(false);
     } else {
-      setIsCarritoEnabled(true);
+      setIsShoppingCartEnabled(true);
     }
   };
 
@@ -83,11 +83,11 @@ export const Navbar = () => {
             <div className="relative">
               <div
                 className={`carrito carrito${
-                  isCarritoEnabled ? "-nav-enabled" : "-nav-disabled"
+                  isShoppingCartEnabled ? "-nav-enabled" : "-nav-disabled"
                 }`}
                 onClick={changeEnabledState}
               ></div>
-              <Counter num={carrito.productos.length}></Counter>
+              <Counter num={shoppingCart.productos.length}></Counter>
             </div>
           </div>
           <div

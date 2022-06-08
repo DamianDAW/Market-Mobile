@@ -37,7 +37,7 @@ export const Login = () => {
               type="text"
               name="email"
               id="email"
-              value={userInfo.email}
+              value={userInfo.email ?? ""}
               onChange={handleChange}
             />
           </div>
