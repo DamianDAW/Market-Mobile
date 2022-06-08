@@ -28,8 +28,9 @@ export const Login = () => {
     }
     setIsLoading(false)
     setMessageMailValidation('Enter valid mail')
-    setMessagePassValidation('Enter valid pass')
+    setMessagePassValidation('Enter valid password')
   }
+  
   
   const handleChangeEmail = (event) => {
     const emailRegex = /\S+@\S+\.\S+/
@@ -49,9 +50,9 @@ export const Login = () => {
     setUserData({ ...userData, email: event.target.value })
   }
 
+
   const handleChangePassword = (event) => {
     const passRegex = /^[0-9]*$/
-
     
     if(passRegex.test(password)) {
       setIsValidPass(true)

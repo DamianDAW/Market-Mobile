@@ -56,7 +56,6 @@ hr {
 }
 
 input {
-  width: 0;
   border: none;
   outline: none;
   padding: 0;
@@ -83,10 +82,10 @@ input {
   text-decoration: none;
 }
 
-.search-box:hover > input {
+/* .search-box:hover > input {
   width: 200px;
   padding: 0 10px;
-}
+} */
 
 @media screen and (max-width: 425px) {
   .navbar {
