@@ -48,29 +48,40 @@ export const App = () => {
   };
 
   const handleSetShoppingCart = ({ id, model, price }) => {
-    const isProductRepeated = shoppingCart.productos.find(
+    console.log(id);
+    const repeatedProductoOnShoppingCart = shoppingCart.productos.find(
       (producto) => producto.id === id
     );
     let newShoppingCart;
-    if (isProductRepeated) {
-      isProductRepeated.amount++;
-      isProductRepeated.total =
-        isProductRepeated.total + isProductRepeated.price;
+
+    if (repeatedProductoOnShoppingCart) {
+      repeatedProductoOnShoppingCart.amount++;
+      repeatedProductoOnShoppingCart.total =
+        repeatedProductoOnShoppingCart.total +
+        Number(repeatedProductoOnShoppingCart.price);
 
       newShoppingCart = {
-        productos: [...shoppingCart.productos, isProductRepeated],
-        total: shoppingCart.total + price,
+        productos: [
+          ...shoppingCart.productos.filter((producto) => producto.id !== id),
+          repeatedProductoOnShoppingCart,
+        ],
+        total: shoppingCart.total + Number(price),
       };
     } else {
       newShoppingCart = {
         productos: [
           ...shoppingCart.productos,
-          { id, model, price, amount: 1, total: price },
+          { id, model, price, amount: 1, total: Number(price) },
         ],
-        total: shoppingCart.total + price,
+        total: shoppingCart.total + Number(price),
       };
     }
+
     setShoppingCart(newShoppingCart);
+    window.localStorage.setItem(
+      "shoppingCart",
+      JSON.stringify(newShoppingCart)
+    );
   };
 
   return (

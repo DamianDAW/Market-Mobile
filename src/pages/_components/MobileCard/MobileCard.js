@@ -55,7 +55,7 @@ export const MobileCard = ({ mobile }) => {
             className={`carrito carrito-disabled`}
             onClick={(event) => {
               event.stopPropagation();
-              setShoppingCart(event, { id, model, price });
+              setShoppingCart({ id, model, price });
             }}
           ></div>
         </div>
