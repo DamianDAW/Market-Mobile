@@ -1,0 +1,12 @@
+.message {
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
