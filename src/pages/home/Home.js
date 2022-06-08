@@ -91,9 +91,13 @@ export const Home = () => {
                 </ul>
                 :
                 <ul className="list-inline">
-                  <li className="list-inline-item"><a href={handleClickHome}>Home</a></li>
-                  <li className="list-inline-item"><a href="##">Terms</a></li>
-                  <li className="list-inline-item"><a href="##">Privacy Policy</a></li>
+                  <li className="list-inline-item">
+                  <Link                  
+                      to="/mobiles"
+                      >
+                      <span>Home</span>
+                    </Link>
+                  </li>                  
                 </ul>
               }
               <p className="copyright">Market Mobile © 2022</p>
