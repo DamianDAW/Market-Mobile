@@ -2,9 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import { MobileList } from "../_components/MobileList/MobileList";
 import { getMobiles } from '../../services/getMobiles'
 import { FiSearch } from 'react-icons/fi'
-import './Home.css'
-import AppContext from "../../context/AppContext";
 import { Link } from "react-router-dom";
+import AppContext from "../../context/AppContext";
+import './Home.css'
 
 
 export const Home = () => { 
@@ -12,7 +12,6 @@ export const Home = () => {
   const [ filterSearch, setfilterSearch ] = useState('');
   const [ mobiles, setMobiles ] = useState([])
   const{userData} = useContext(AppContext)
-
 
 
 
@@ -34,6 +33,13 @@ export const Home = () => {
 
   const handleSearch= (event) => {
     setfilterSearch(event.target.value)
+  }
+
+  const scrollToTop = () =>{
+    window.scrollTo({
+      top: 0, 
+      behavior: 'smooth'  
+    })
   }
 
   return (
@@ -97,6 +103,9 @@ export const Home = () => {
                   </li>                  
                 </ul>
               }
+              <button
+                className="button-up-scroll" 
+                onClick={scrollToTop}>subir</button>
               <p className="copyright">Market Mobile © 2022</p>
           </footer>
         </div>

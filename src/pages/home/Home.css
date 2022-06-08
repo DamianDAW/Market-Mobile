@@ -84,6 +84,9 @@ input {
 
 /*FOOTER*/
 .footer-basic {
+  display: flex;
+  position: relative;
+  justify-content: center;
   padding: 40px 0;
   background-color: #ffffff;
   color: #4b4c4d;
@@ -112,35 +115,20 @@ input {
   opacity: 1;
 }
 
-.footer-basic .social {
-  text-align: center;
-  padding-bottom: 25px;
-}
-
-.footer-basic .social > a {
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  display: inline-block;
-  text-align: center;
-  border-radius: 50%;
-  border: 1px solid #ccc;
-  margin: 0 8px;
-  color: inherit;
-  opacity: 0.75;
-}
-
-.footer-basic .social > a:hover {
-  opacity: 0.9;
-}
-
 .footer-basic .copyright {
   margin-top: 15px;
   text-align: center;
   font-size: 13px;
   color: #aaa;
   margin-bottom: 0;
+}
+
+.button-up-scroll {
+  margin-left: 24rem;
+  background-color: #393d3f;
+  mask: url(../../img/circle-arrow-up-solid.svg) no-repeat center;
+  width: 40px;
+  height: 40px;
 }
 
 @media screen and (max-width: 425px) {
