@@ -4,7 +4,7 @@ import { getMobiles } from '../../services/getMobiles'
 import { FiSearch } from 'react-icons/fi'
 import './Home.css'
 import AppContext from "../../context/AppContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export const Home = () => { 
@@ -13,10 +13,7 @@ export const Home = () => {
   const [ mobiles, setMobiles ] = useState([])
   const{userData} = useContext(AppContext)
 
-  const navigate = useNavigate()   
-  const handleClickHome = () => {
-    return navigate('/mobiles/favorites')
-  }
+
 
 
   const getFilteredMobile = () => {
