@@ -5,7 +5,6 @@ import { MobileDetail } from "./pages/MobileDetail/MobileDetail";
 import { FavList } from "./pages/FavList/FavList"
 import { Navbar } from "./components/Navbar/Navbar";
 import { Login } from './pages/Login/Login';
-import { Cart } from './pages/Cart/Cart'
 import AppContext from './context/AppContext';
 
 export const App = () => {
@@ -28,16 +27,15 @@ export const App = () => {
 
  
   const [ addedToCart, setAddedToCart ] = useState(() => {
-    const data = window.localStorage.getItem('cart-added-mobiles')
+    const data = window.localStorage.getItem('shoppingCart')
       if(data) {
       return JSON.parse(data)   
       } 
       return {
-        items: [],
+        products: [],
         total: 0,
       };      
     }) 
-
     
   
   const handleSetFavorites= (newFavorites) => {
@@ -54,29 +52,31 @@ export const App = () => {
 
     
   const handleAddToCart = ({ id, brand, model, price, imgUrl }) => {
-      
-      const isItemRepeated = addedToCart.items.find(item => item.id === id)
-      let newCart
-      if(isItemRepeated) {
-        isItemRepeated.amount++
-        isItemRepeated.total = isItemRepeated.total + Number(isItemRepeated.price)
 
-        newCart = {
-            items: [...addedToCart.items, isItemRepeated],
-            total: addedToCart.total + Number(price),
-        } 
-        
-        } else {
-        newCart = {
-          items: [
-            ...addedToCart.items,
-            { id, brand, model, price, amount: 1, total:  Number(price), imgUrl },
-          ],
-          total: addedToCart.total + Number(price),
-        }
-      }
-      setAddedToCart(newCart);
-      window.localStorage.setItem("cart-added-mobiles", JSON.stringify(addedToCart));
+
+         const isItemRepeated = addedToCart.products.find(item => item.id === id)
+         let newCart
+         if(isItemRepeated) {
+           isItemRepeated.amount++
+           isItemRepeated.total = isItemRepeated.total + Number(isItemRepeated.price)
+   
+           newCart = {
+               products: [...addedToCart.products, isItemRepeated],
+               total: addedToCart.total + Number(price),
+           } 
+           
+           } else {
+             newCart = {
+              products: [
+                 ...addedToCart.products,
+                 { id, brand, model, price, amount: 1, total:  Number(price), imgUrl },
+               ],
+               total: addedToCart.total + Number(price),
+             }
+           }
+         setAddedToCart(newCart);
+         window.localStorage.setItem("shoppingCart", JSON.stringify(newCart));      
+      
     }
 
 
@@ -90,6 +90,7 @@ export const App = () => {
             setUserData: handleSetUserData,
             addedToCart,
             setAddedToCart: handleAddToCart,
+       
         }}
         >
         <Navbar />
@@ -120,16 +121,7 @@ export const App = () => {
                 )
                 }
             />
-             <Route
-                path="/mobiles/cart"
-                element={
-                userData.isLogged ? (
-                    <Cart />
-                ) : (
-                    <Navigate to="/mobiles" replace />
-                )
-                }
-            />
+           
         </Routes>
         </div>
         </AppContext.Provider>

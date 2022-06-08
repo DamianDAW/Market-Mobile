@@ -215,7 +215,7 @@
 }
 
 .userOptions-container {
-  margin-top: 5px;
+  margin-top: 1rem;
 }
 
 .cart:active {
@@ -232,4 +232,15 @@
   mask: url(../../../img/cart-arrow-down-solid.svg) no-repeat center;
   width: 25px;
   height: 25px;
+}
+
+.cancel-cart {
+  background-color: rgb(166 161 192);
+  mask: url(../../../img/xmark-solid.svg) no-repeat center;
+  width: 25px;
+  height: 25px;
+}
+
+.pruebas {
+  display: flex;
 }

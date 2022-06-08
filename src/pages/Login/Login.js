@@ -14,7 +14,7 @@ export const Login = () => {
   const navigate = useNavigate()
  
   
-  const handleLogin= (event) => {
+  const handleSubmitLogin= (event) => {
     event.preventDefault()
     setIsLoading(true);
     setTimeout(() => {
@@ -24,11 +24,11 @@ export const Login = () => {
     setUserData({ ...userData, isLogged: true })
   }
 
-  const handleOnChange = (event) => {
+  const handleChangeEmail = (event) => {
     setUserData({ ...userData, email: event.target.value });
   }
 
-  const handlePassword = (event) => {
+  const handleChangePassword = (event) => {
     setPassword(event.target.value);
   }
 
@@ -37,36 +37,37 @@ export const Login = () => {
   return (
     <div className="container mt-5">
       {isLoading ? (
-        <div>Iniciando Sesion...</div>
+        <Spinner />
       ) : ( 
         <>
         <h1>Login</h1>
         <hr />
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSubmitLogin}>
           <div className="form-group">
             <label htmlFor="nameInput">Email address</label>
             <input 
               required 
-              type="text" 
+              type="email" 
               className="form-control" 
               id="nameInput" 
               placeholder="Enter username" 
               name="uname" 
               value={userData.email}
-              onChange= {handleOnChange}
+              onChange= {handleChangeEmail}
             />
           </div>
           <div className="form-group">
             <label htmlFor="passwordInput">Password</label>
             <input 
               required 
-              type="password" 
+              type="password"
+              pattern="[0-9]*"
               className="form-control" 
               id="passwordInput" 
               placeholder="Password" 
               name="pass" 
               value={password}
-              onChange={handlePassword}
+              onChange={handleChangePassword}
             />
           </div>
           <button 
