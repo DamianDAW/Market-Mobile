@@ -87,7 +87,7 @@ input {
   display: flex;
   position: relative;
   justify-content: center;
-  padding: 40px 0;
+  padding: 20px 0;
   background-color: #ffffff;
   color: #4b4c4d;
 }
@@ -123,12 +123,27 @@ input {
   margin-bottom: 0;
 }
 
+.scroll-button-container {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
 .button-up-scroll {
-  margin-left: 24rem;
-  background-color: #393d3f;
+  background-color: #2c3441;
+  opacity: 0.9;
   mask: url(../../img/circle-arrow-up-solid.svg) no-repeat center;
   width: 40px;
   height: 40px;
+  transition: 0.5s ease;
+}
+
+.button-up-scroll:active {
+  transform: scale(0.85);
+}
+
+.button-up-scroll:hover {
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 425px) {

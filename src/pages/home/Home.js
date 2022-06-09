@@ -69,8 +69,14 @@ export const Home = () => {
             <span>The item searched doesn't exists</span>                 
           )    
         }
+        <div className="scroll-button-container">
+          <button
+            className="button-up-scroll" 
+            onClick={scrollToTop}>
+          </button>         
+        </div>
          <div className="footer-basic">
-          <footer>          
+          <footer> 
               {
                 userData.isLogged ?
                 <ul className="list-inline">
@@ -103,9 +109,7 @@ export const Home = () => {
                   </li>                  
                 </ul>
               }
-              <button
-                className="button-up-scroll" 
-                onClick={scrollToTop}>subir</button>
+             
               <p className="copyright">Market Mobile © 2022</p>
           </footer>
         </div>
