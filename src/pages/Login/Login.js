@@ -15,20 +15,18 @@ export const Login = () => {
   const [messagePassValidation, setMessagePassValidation] = useState('')
 
   const navigate = useNavigate()
- 
+
+
+
   const handleSubmitLogin= (event) => {
-    event.preventDefault()
-    if(isValidMail && isValidPass ) {
-      setIsLoading(true)
-      setTimeout(() => {
-        setIsLoading(false)
-        navigate("/mobiles")
-      }, 2000)
-      setUserData({ ...userData, isLogged: true })       
-    }
-    setIsLoading(false)
-    setMessageMailValidation('Enter valid mail')
-    setMessagePassValidation('Enter valid password')
+    event.preventDefault() 
+
+    setIsLoading(true) 
+    setTimeout(() => {
+      setIsLoading(false)
+      navigate("/mobiles")
+    }, 1000)
+      setUserData({ ...userData, isLogged: true })           
   }
   
   
@@ -37,7 +35,6 @@ export const Login = () => {
     const email = event.target.value
     
     if (!email || email.length === 0) {
-      console.log('holaaaaaa');
       setMessageMailValidation ('Email cannot be empty')
     }
     if (emailRegex.test(email)) {
@@ -63,59 +60,57 @@ export const Login = () => {
     }
     setPassword(event.target.value)
     
-  }
+  }  
 
   return (
     <div className="container mt-5">
       {isLoading ? (
         <Spinner />
       ) : (          
-            <>
-            <h1>Login</h1>
-            <hr />
-            <form onSubmit={handleSubmitLogin}>
-            
-              <div className="form-group">
-                <label htmlFor="nameInput">Email address</label>
-                <input 
-                  // required 
-                  type="text" 
-                  className="form-control" 
-                  id="nameInput" 
-                  placeholder="Enter email" 
-                  name="uname" 
-                  value={userData.email}
-                  onChange= {handleChangeEmail}
-                />
-                <div className={`message ${isValidMail ? 'success' : 'error'}`}>
-                  {messageMailValidation}
-                </div>
+          <>
+          <h1>Login</h1>
+          <hr />
+          <form onSubmit={handleSubmitLogin}>
+          
+            <div className="form-group">
+              <label htmlFor="nameInput">Email address</label>
+              <input 
+                // required 
+                type="text" 
+                className="form-control" 
+                id="nameInput" 
+                placeholder="Enter email" 
+                name="uname" 
+                onChange= {handleChangeEmail}
+              />
+              <div className={`message ${isValidMail ? 'success' : 'error'}`}>
+                {messageMailValidation}
               </div>
-              <div className="form-group">
-                <label htmlFor="passwordInput">Password (only numeric 0-9) </label>
-                <input 
-                  // required 
-                  type="password"
-                  // pattern="[0-9]*"
-                  className="form-control" 
-                  id="passwordInput" 
-                  placeholder="Password" 
-                  name="pass" 
-                  value={password}
-                  onChange={handleChangePassword}
-                />
-                <div className={`message ${isValidPass ? 'success' : 'error'}`}>
-                  {messagePassValidation}
-                </div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="passwordInput">Password (only numeric 0-9) </label>
+              <input 
+                // required 
+                type="password"
+                // pattern="[0-9]*"
+                className="form-control" 
+                id="passwordInput" 
+                placeholder="Password" 
+                name="pass" 
+                onChange={handleChangePassword}
+              />
+              <div className={`message ${isValidPass ? 'success' : 'error'}`}>
+                {messagePassValidation}
               </div>
-              <button 
-                className="btn btn-primary"
+            </div>
+            <button 
+                className= {`btn btn-primary ${isValidMail && isValidPass ? "active" : "disabled"}`}
                 type="submit"
                 >
                   Login
-              </button>      
-            </form> 
-            </>         
+              </button>                      
+          </form> 
+          </>         
           )       
       }
     </div>

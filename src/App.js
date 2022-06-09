@@ -54,30 +54,30 @@ export const App = () => {
   const handleAddToCart = ({ id, brand, model, price, imgUrl }) => {
 
 
-         const isItemRepeated = addedToCart.products.find(item => item.id === id)
-         let newCart
-         if(isItemRepeated) {
-           isItemRepeated.amount++
-           isItemRepeated.total = isItemRepeated.total + Number(isItemRepeated.price)
-   
-           newCart = {
-               products: [...addedToCart.products, isItemRepeated],
-               total: addedToCart.total + Number(price),
-           } 
-           
-           } else {
-             newCart = {
-              products: [
-                 ...addedToCart.products,
-                 { id, brand, model, price, amount: 1, total:  Number(price), imgUrl },
-               ],
-               total: addedToCart.total + Number(price),
-             }
-           }
-         setAddedToCart(newCart);
-         window.localStorage.setItem("shoppingCart", JSON.stringify(newCart));      
+    const isItemRepeated = addedToCart.products.find(item => item.id === id)
+    let newCart
+    if(isItemRepeated) {
+      isItemRepeated.amount++
+      isItemRepeated.total = isItemRepeated.total + Number(isItemRepeated.price)
+
+      newCart = {
+          products: [...addedToCart.products],
+          total: addedToCart.total + Number(price),
+      } 
       
-    }
+      } else {
+        newCart = {
+        products: [
+            ...addedToCart.products,
+            { id, brand, model, price, amount: 1, total:  Number(price), imgUrl },
+          ],
+          total: addedToCart.total + Number(price),
+        }
+      }
+    setAddedToCart(newCart);
+    window.localStorage.setItem("shoppingCart", JSON.stringify(newCart));      
+  
+  }
 
 
   return(
