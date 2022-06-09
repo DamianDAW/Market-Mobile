@@ -104,11 +104,12 @@ export const Login = () => {
               </div>
             </div>
             <button 
-                className= {`btn btn-primary ${isValidMail && isValidPass ? "active" : "disabled"}`}
+                className= "btn btn-primary"
                 type="submit"
+                disabled={!(isValidMail && isValidPass) ? "{true}" : ""}
                 >
                   Login
-              </button>                      
+            </button>                      
           </form> 
           </>         
           )       

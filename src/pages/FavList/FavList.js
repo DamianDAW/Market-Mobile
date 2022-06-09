@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FavContext from "../../context/AppContext";
 import { MobileList } from "../_components/MobileList/MobileList"
 import './FavList.css'
@@ -21,6 +21,23 @@ export const FavList = () => {
         <button className='button' onClick={handleReturn}>
                 Return
         </button>
+        <div className="footer-basic">
+          <footer>            
+            <ul className="list-inline">          
+              <li className="list-inline-item">
+                <Link                  
+                  to="/mobiles"
+                  >
+                  <span>Home</span>
+                </Link>
+              </li>
+              <li className="list-inline-item">
+                <a href="##">Cart</a>
+              </li>                
+            </ul>                         
+              <p className="copyright">Market Mobile © 2022</p>
+          </footer>
+        </div>          
       </div>            
     ) 
   }
@@ -36,6 +53,23 @@ export const FavList = () => {
                   Return
           </button>
         </div>
+        <div className="footer-basic">
+          <footer>            
+            <ul className="list-inline">          
+              <li className="list-inline-item">
+                <Link                  
+                  to="/mobiles"
+                  >
+                  <span>Home</span>
+                </Link>
+              </li>
+              <li className="list-inline-item">
+                <a href="##">Cart</a>
+              </li>                
+            </ul>                         
+              <p className="copyright">Market Mobile © 2022</p>
+          </footer>
+        </div>          
       </div>  
     )
 }

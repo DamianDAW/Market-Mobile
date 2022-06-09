@@ -29,21 +29,16 @@ export const Home = () => {
 
   const getFilteredMobile = () => {
 
-    if(mobiles.length === 0) {
-      <Spinner />
-    } else {
-      
-      const filteredMobile = mobiles.filter(
-          mobile => 
-            mobile.model.toLowerCase().includes(filterSearch.toLowerCase()) || 
-            mobile.brand.toLowerCase().includes(filterSearch.toLowerCase()) 
-        ) || mobiles
-      
-        if(filteredMobile.length === 0 || typeof filteredMobile  === 'undefined') {
-          return false
-        }
-        return filteredMobile       
+    const filteredMobile = mobiles.filter(
+      mobile => 
+        mobile.model.toLowerCase().includes(filterSearch.toLowerCase()) || 
+        mobile.brand.toLowerCase().includes(filterSearch.toLowerCase()) 
+    ) || mobiles
+  
+    if(filteredMobile.length === 0) {
+      return false
     }
+    return filteredMobile       
 
   }
 
@@ -75,22 +70,20 @@ export const Home = () => {
         <div className="result-div">
           <h4>Results</h4>
             <hr/>         
-        </div>    
-        
+        </div>         
         {             
           getFilteredMobile() 
           ?                 
             <MobileList mobiles={getFilteredMobile()}  />
           : 
-            !mobiles.length > 0 ? 
+            !mobiles.length > 0 
+            ? 
             <div className="container-spinner">
             <Spinner />
             </div>  
             :
-
             <span>The item searched doesn't exists</span>                      
         }          
-          
         <div className="scroll-button-container">
           <button
             className="button-up-scroll" 
@@ -116,22 +109,16 @@ export const Home = () => {
                 </ul>
                 :
                 <></>
-              }
-            
+              }            
               <p className="copyright">Market Mobile © 2022</p>
           </footer>
-        </div>  
-         
+        </div>          
       </div>  
      
-    }    
- 
-    </>
- 
-     
-)
-    
-  }
+    } 
+    </>     
+  )    
+}
 
 
 
