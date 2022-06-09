@@ -13,3 +13,14 @@
 .form-item :first-child{
     margin-right: 10px;
 }
+
+.input-container{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.error-message{
+    color: red;
+    font-size: small
+}
