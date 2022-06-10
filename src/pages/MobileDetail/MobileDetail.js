@@ -16,11 +16,11 @@ export const MobileDetail = () => {
 
   const [mobile, notFoundMobile] = useSingleMobile(params.id) // Hook sustituye a getmobile con el useEffect
   const [isFavorite, changeFav] = useFavoriteMobile(mobile)
-  const{userData, setAddedToCart} = useContext(AppContext)
+  const{userData, setShoppingCart} = useContext(AppContext)
   const {id, brand, model, price, imgUrl} = mobile
 
   const handleAddToCart = () => {
-    setAddedToCart(mobile)
+    setShoppingCart(mobile)
   }
 
   if(notFoundMobile) {

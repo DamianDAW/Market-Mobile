@@ -7,7 +7,7 @@ import './Navbar.css'
 
 export const Navbar = () => {
   
-  const { userData, setUserData, addedToCart } = useContext(AppContext)
+  const { userData, setUserData, shoppingCart } = useContext(AppContext)
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -79,7 +79,7 @@ export const Navbar = () => {
                 <div
                   className="cart cart-nav-disabled"
                 ></div>
-                <Counter num={addedToCart.products.length}></Counter>
+                <Counter num={shoppingCart.products.length}></Counter>
               </div>
             </div>
             <div

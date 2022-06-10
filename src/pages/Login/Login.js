@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import AppContext from "../../context/AppContext"
 import { Spinner } from "../MobileDetail/components/Spinner/Spinner"
@@ -6,17 +6,23 @@ import './Login.css'
 
 export const Login = () => {
   
-  const [ password, setPassword ] = useState("")
+  const [ email, setEmail ] = useState('')
+  const [ password, setPassword ] = useState('')
   const { userData, setUserData } = useContext(AppContext)
   const [ isLoading, setIsLoading ] = useState(false)
-  const [ isValidMail, setIsValidMail ] = useState(false)
-  const [messageMailValidation, setMessageMailValidation] = useState('')
-  const [ isValidPass, setIsValidPass ] = useState(false)
-  const [messagePassValidation, setMessagePassValidation] = useState('')
+  const [isEmailInputVisited, setIsEmailInputVisited] = useState(false)
+  const [isPasswordInputVisited, setIsPasswordInputVisited] = useState(false)
+  const [messageErrorMailValidation, setMessageErrorMailValidation] = useState('')
+  const [messageErrorPassValidation, setMessageErrorPassValidation] = useState('')
 
   const navigate = useNavigate()
 
+  useEffect(() => {
+    validateInput(password, "password");
+    validateInput(email, "email");
+  }, [email, password])
 
+  
 
   const handleSubmitLogin= (event) => {
     event.preventDefault() 
@@ -31,36 +37,48 @@ export const Login = () => {
   
   
   const handleChangeEmail = (event) => {
-    const emailRegex = /\S+@\S+\.\S+/
-    const email = event.target.value
-    
-    if (!email || email.length === 0) {
-      setMessageMailValidation ('Email cannot be empty')
-    }
-    if (emailRegex.test(email)) {
-      setIsValidMail(true)
-      setMessageMailValidation('Valid email')
-    } else {
-      setIsValidMail(false)
-      setMessageMailValidation('Please enter a valid email! Ex: fakeEmail@gmail.es')
-    }
-    setUserData({ ...userData, email: event.target.value })
+    validateInput(event.target.value, 'email')   
+    setEmail(event.target.value)
+    setUserData({ ...userData, email: event.target.value })    
   }
 
 
-  const handleChangePassword = (event) => {
-    const passRegex = /^[0-9]*$/
-    
-    if(passRegex.test(password)) {
-      setIsValidPass(true)
-      setMessagePassValidation('Valid password')
-    }else {
-      setIsValidPass(false)
-      setMessagePassValidation('Invalid format password (only numeric 0-9)')
-    }
-    setPassword(event.target.value)
-    
+  const handleChangePassword = (event) => {  
+    validateInput(event.target.value, 'password')
+    setPassword(event.target.value)     
   }  
+
+
+  const validateInput = (inputValue, inputType) => {
+    if(inputType === 'password') {
+      if (inputValue === '') {
+        setMessageErrorPassValidation("Password can't be empty")
+      } else {
+        const passRegex = /^[0-9]*$/
+
+
+        setMessageErrorPassValidation(
+        passRegex.test(inputValue) ? '' : 'Invalid format password (only numeric 0-9)'
+        )
+      }
+    }
+    if (inputType === 'email') {
+      if (inputValue === '' ) {
+        setMessageErrorMailValidation("Email can't be empty")
+      } else {
+        const emailRegex = /\S+@\S+\.\S+/
+
+
+        setMessageErrorMailValidation(
+          emailRegex.test(inputValue) 
+          ? '' 
+          : 'Please enter a valid email! Ex: fakeEmail@gmail.es'
+        ) 
+        
+      }
+    }
+    return
+  }
 
   return (
     <div className="container mt-5">
@@ -70,43 +88,59 @@ export const Login = () => {
           <>
           <h1>Login</h1>
           <hr />
-          <form onSubmit={handleSubmitLogin}>
-          
+          <form onSubmit={handleSubmitLogin}>          
             <div className="form-group">
-              <label htmlFor="nameInput">Email address</label>
+              <label htmlFor="emailInput">Email address</label>
               <input 
                 // required 
-                type="text" 
+                type="email" 
                 className="form-control" 
-                id="nameInput" 
+                id="emailInput" 
                 placeholder="Enter email" 
-                name="uname" 
+                name="umail" 
                 onChange= {handleChangeEmail}
-              />
-              <div className={`message ${isValidMail ? 'success' : 'error'}`}>
-                {messageMailValidation}
-              </div>
+                onBlur={() => setIsEmailInputVisited(true)}
+                value={email}
+              />     
+              {messageErrorMailValidation && isEmailInputVisited && 
+               ( <div className={'message error'}>
+                  {messageErrorMailValidation}
+                </div> )                   
+              }    
+              {!messageErrorMailValidation && isEmailInputVisited &&
+               ( <div className={'message success'}>
+                  {'Valid mail!'}
+                </div> )                   
+              }    
+                   
             </div>
             <div className="form-group">
               <label htmlFor="passwordInput">Password (only numeric 0-9) </label>
               <input 
-                // required 
                 type="password"
-                // pattern="[0-9]*"
                 className="form-control" 
                 id="passwordInput" 
                 placeholder="Password" 
                 name="pass" 
                 onChange={handleChangePassword}
+                onBlur={() => setIsPasswordInputVisited(true)}
+                value={password}
               />
-              <div className={`message ${isValidPass ? 'success' : 'error'}`}>
-                {messagePassValidation}
-              </div>
+                {messageErrorPassValidation && isPasswordInputVisited &&
+                (<div className={'message error'}>
+                  {messageErrorPassValidation}
+                </div>)                            
+                }  
+                {!messageErrorPassValidation && isPasswordInputVisited &&
+                (<div className={'message success'}>
+                  {'Valid password!'}
+                </div> )                   
+                }         
             </div>
             <button 
                 className= "btn btn-primary"
                 type="submit"
-                disabled={!(isValidMail && isValidPass) ? "{true}" : ""}
+                disabled={Boolean(messageErrorMailValidation ) || Boolean(messageErrorPassValidation)}
                 >
                   Login
             </button>                      
