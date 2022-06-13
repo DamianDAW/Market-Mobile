@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import AppContext from "../../context/AppContext"
-import { Spinner } from "../MobileDetail/components/Spinner/Spinner"
+import { Spinner } from "../../components/Spinner/Spinner"
 import './Login.css'
 
 export const Login = () => {

@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useSingleMobile } from './hooks/useSingleMobile'
 import { useFavoriteMobile } from '../../hooks/useFavoriteMobile'
-import { Spinner } from './components/Spinner/Spinner'
+import { Spinner } from '../../components/Spinner/Spinner'
 import './MobileDetail.css'
 import { useContext } from 'react'
 import AppContext from '../../context/AppContext'

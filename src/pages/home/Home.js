@@ -3,7 +3,7 @@ import { MobileList } from "../_components/MobileList/MobileList";
 import { getMobiles } from '../../services/getMobiles'
 import { FiSearch } from 'react-icons/fi'
 import './Home.css'
-import { Spinner } from "../MobileDetail/components/Spinner/Spinner";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 
 export const Home = () => { 
