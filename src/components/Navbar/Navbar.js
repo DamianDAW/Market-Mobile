@@ -1,13 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import AppContext from "../../context/AppContext";
+import { Cart } from "../Cart/Cart";
 import { Counter } from "../Counter/Counter";
 
 import './Navbar.css'
 
 export const Navbar = () => {
   
-  const { userData, setUserData, addedToCart } = useContext(AppContext)
+  const [ isOpen, setIsOpen ] = useState(false)
+  const { userData, setUserData, shoppingCart } = useContext(AppContext)
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -18,7 +20,6 @@ export const Navbar = () => {
     }
     return false
   }
-
 
   const handleLogin = () => {
     navigate("/mobiles/login");
@@ -52,7 +53,8 @@ export const Navbar = () => {
         </nav>
       )
     } else {
-      return (
+      return (    
+        <>        
         <nav className="nav-div">
           <div className="nav-div__left-side">
             <Link
@@ -69,8 +71,7 @@ export const Navbar = () => {
               to="/mobiles/favorites"
             >
               Favorites
-            </Link>
-         
+            </Link>         
           </div>
   
           <div className="nav-div__rigth-side">
@@ -78,8 +79,14 @@ export const Navbar = () => {
               <div className="relative">
                 <div
                   className="cart cart-nav-disabled"
+                  onClick={() => {
+                    !isOpen ?
+                      setIsOpen(true)
+                    :
+                      setIsOpen(false)
+                  }}
                 ></div>
-                <Counter num={addedToCart.products.length}></Counter>
+                <Counter num={shoppingCart.products.length}></Counter>
               </div>
             </div>
             <div
@@ -91,12 +98,10 @@ export const Navbar = () => {
               LogOut
             </div>
           </div>
-        </nav>
+        </nav>    
+        {isOpen && <Cart />}   
+        </>    
       )
     } 
-
 }
-
-
-
 

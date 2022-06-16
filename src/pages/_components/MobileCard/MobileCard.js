@@ -6,11 +6,9 @@ import { useFavoriteMobile } from '../../../hooks/useFavoriteMobile'
 import './MobileCard.css'
 
 
-
 export const MobileCard = ({mobile}) => {
 
-
-  const { userData, setAddedToCart } = useContext(AppContext)
+  const { userData, setShoppingCart } = useContext(AppContext)
   const {id, brand, model, price, imgUrl} = mobile
   const navigate = useNavigate()
   const redirectClickOnCard = () => {
@@ -64,7 +62,10 @@ export const MobileCard = ({mobile}) => {
               className={`cart cart-disabled`}
               onClick={(event) => {
                 event.stopPropagation()
-                setAddedToCart({ id, brand, model, price, imgUrl, event})
+                setShoppingCart({ 
+                  type: "increment", 
+                  payload:{id, brand, model, price, imgUrl, event}
+                })
               }}
             ></div>             
           </div>
